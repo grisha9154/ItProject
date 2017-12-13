@@ -1,0 +1,12 @@
+E:\Work\itransition\Project\ItProject\ItProject\bin\Debug\netcoreapp2.0\ItProject.deps.json
+E:\Work\itransition\Project\ItProject\ItProject\bin\Debug\netcoreapp2.0\ItProject.runtimeconfig.json
+E:\Work\itransition\Project\ItProject\ItProject\bin\Debug\netcoreapp2.0\ItProject.runtimeconfig.dev.json
+E:\Work\itransition\Project\ItProject\ItProject\bin\Debug\netcoreapp2.0\ItProject.dll
+E:\Work\itransition\Project\ItProject\ItProject\bin\Debug\netcoreapp2.0\ItProject.pdb
+E:\Work\itransition\Project\ItProject\ItProject\obj\Debug\netcoreapp2.0\ItProject.csprojResolveAssemblyReference.cache
+E:\Work\itransition\Project\ItProject\ItProject\obj\Debug\netcoreapp2.0\ItProject.csproj.CoreCompileInputs.cache
+E:\Work\itransition\Project\ItProject\ItProject\obj\Debug\netcoreapp2.0\UserSecretsAssemblyInfo.cs
+E:\Work\itransition\Project\ItProject\ItProject\obj\Debug\netcoreapp2.0\ItProject.AssemblyInfoInputs.cache
+E:\Work\itransition\Project\ItProject\ItProject\obj\Debug\netcoreapp2.0\ItProject.AssemblyInfo.cs
+E:\Work\itransition\Project\ItProject\ItProject\obj\Debug\netcoreapp2.0\ItProject.dll
+E:\Work\itransition\Project\ItProject\ItProject\obj\Debug\netcoreapp2.0\ItProject.pdb
