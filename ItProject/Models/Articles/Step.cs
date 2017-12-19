@@ -10,8 +10,8 @@ namespace ItProject.Models.Articles
         public int Id { get; set; }
         public string Name { get; set; }
         public string Body { get; set; }
-
         public int ArticleId { get; set; }
         public Articles Team { get; set; }
+        public string Text { get; set; }
     }
 }
