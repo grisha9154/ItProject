@@ -12,7 +12,6 @@ namespace ItProject.Models.Articles
         public string Description { get; set; }
         public string Theme { get; set; }
         //  public List<string> Tags { get; set; }
-        public int ApplicationUsersId { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
         public List<Comment> Comments { get; set; }
         public List<Step> Steps { get; set; }

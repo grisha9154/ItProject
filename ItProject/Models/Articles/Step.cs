@@ -11,6 +11,6 @@ namespace ItProject.Models.Articles
         public string Name { get; set; }
         public string Body { get; set; }
         public int ArticleId { get; set; }
-        public Article Article { get; set; }
+        public Article Article { get; set; } ///TODO удадить эту строку
     }
 }

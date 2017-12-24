@@ -76,7 +76,6 @@ namespace ItProject.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ApplicationUserId = table.Column<string>(nullable: true),
-                    ApplicationUsersId = table.Column<int>(nullable: false),
                     Date = table.Column<DateTime>(nullable: false),
                     Description = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
@@ -185,11 +184,21 @@ namespace ItProject.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ArticlesId = table.Column<int>(nullable: false)
+                    ApplicationUserId = table.Column<string>(nullable: true),
+                    ArticlesId = table.Column<int>(nullable: false),
+                    Body = table.Column<string>(nullable: true),
+                    Date = table.Column<DateTime>(nullable: false),
+                    Like = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Comments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Comments_AspNetUsers_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Comments_Articles_ArticlesId",
                         column: x => x.ArticlesId,
@@ -206,8 +215,7 @@ namespace ItProject.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ArticleId = table.Column<int>(nullable: false),
                     Body = table.Column<string>(nullable: true),
-                    Name = table.Column<string>(nullable: true),
-                    Text = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -263,6 +271,11 @@ namespace ItProject.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comments_ApplicationUserId",
+                table: "Comments",
+                column: "ApplicationUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Comments_ArticlesId",

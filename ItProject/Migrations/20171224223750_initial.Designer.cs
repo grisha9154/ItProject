@@ -11,7 +11,7 @@ using System;
 namespace ItProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20171224215150_initial")]
+    [Migration("20171224223750_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -79,8 +79,6 @@ namespace ItProject.Migrations
 
                     b.Property<string>("ApplicationUserId");
 
-                    b.Property<int>("ApplicationUsersId");
-
                     b.Property<DateTime>("Date");
 
                     b.Property<string>("Description");
@@ -103,9 +101,19 @@ namespace ItProject.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("ApplicationUserId");
+
                     b.Property<int>("ArticlesId");
 
+                    b.Property<string>("Body");
+
+                    b.Property<DateTime>("Date");
+
+                    b.Property<int>("Like");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("ArticlesId");
 
@@ -122,8 +130,6 @@ namespace ItProject.Migrations
                     b.Property<string>("Body");
 
                     b.Property<string>("Name");
-
-                    b.Property<string>("Text");
 
                     b.HasKey("Id");
 
@@ -249,6 +255,10 @@ namespace ItProject.Migrations
 
             modelBuilder.Entity("ItProject.Models.Articles.Comment", b =>
                 {
+                    b.HasOne("ItProject.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId");
+
                     b.HasOne("ItProject.Models.Articles.Article", "Articles")
                         .WithMany("Comments")
                         .HasForeignKey("ArticlesId")

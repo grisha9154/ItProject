@@ -22,7 +22,7 @@ namespace ItProject.Controllers
                 Rating = 5,
                 Description = "Короткий, курс описывающий как парвильно создавать WPF приложжения.",
                 Theme = "С#",
-                Steps = new List<Step>{new Step { Id =0, Name="qwe",Body = "qwe", ArticleId = 0, Text = "qweq"}},
+                Steps = new List<Step>{new Step { Id =0, Name="qwe",Body = "qwe", ArticleId = 0}},
                 ApplicationUser = new ApplicationUser{Id ="2", UserName = "Петров"},
                 Date = DateTime.Now                
             }
