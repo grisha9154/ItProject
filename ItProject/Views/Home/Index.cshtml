@@ -1,3 +1,29 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+
+<div class="container">
+    @{foreach (var article in ViewBag.Articles)
+        {
+            <div class="container">
+                <h2>@article.Name</h2>
+                <p>@article.ApplicationUser.UserName</p>
+                <div class="card" style="width:400px">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col">@article.Theme</div>
+                            <div class="col" align="right">@article.Date</div>
+                        </div>
+
+                    </div>
+                    <img class="card-img-top" src="" alt="Card image" style="width:100%">
+                    <div class="card-body">
+                        <p class="card-text">@article.Description</p>
+                        <a href="article/1" class="btn btn-primary">Read Article</a>
+                    </div>
+                </div>
+                <br>
+            </div>
+        }
+    }
+</div>

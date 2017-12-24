@@ -13,8 +13,8 @@ namespace ItProject.Services
         {
             var emailMessage = new MimeMessage();
 
-            emailMessage.From.Add(new MailboxAddress("Администрация сайта", "login@yandex.ru"));
-            emailMessage.To.Add(new MailboxAddress("", email));
+            emailMessage.From.Add(new MailboxAddress("Администрация сайта", "olegproen@yandex.by"));
+            emailMessage.To.Add(new MailboxAddress("Петров Пётр", email));
             emailMessage.Subject = subject;
             emailMessage.Body = new TextPart(MimeKit.Text.TextFormat.Html)
             {
@@ -24,7 +24,7 @@ namespace ItProject.Services
             using (var client = new SmtpClient())
             {
                 await client.ConnectAsync("smtp.yandex.ru", 25, false);
-                await client.AuthenticateAsync("login@yandex.ru", "password");
+                await client.AuthenticateAsync("olegproen@yandex.by", "qweasd123");
                 await client.SendAsync(emailMessage);
 
                 await client.DisconnectAsync(true);

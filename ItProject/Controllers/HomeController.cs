@@ -5,13 +5,40 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ItProject.Models;
+using ItProject.Models.Articles;
+using ItProject.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace ItProject.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        List<Article> a = new List<Article>
         {
+            new Article
+            {
+                Id = 1,
+                Name = "Работа с WPF",
+                Rating = 5,
+                Description = "Короткий, курс описывающий как парвильно создавать WPF приложжения.",
+                Theme = "С#",
+                Steps = new List<Step>{new Step { Id =0, Name="qwe",Body = "qwe", ArticleId = 0, Text = "qweq"}},
+                ApplicationUser = new ApplicationUser{Id ="2", UserName = "Петров"},
+                Date = DateTime.Now                
+            }
+        };
+
+        ApplicationUser user;
+
+        private ApplicationDbContext db;
+        public HomeController(ApplicationDbContext application)
+        {
+            this.db = application;
+        }
+        public async Task<IActionResult> Index()
+        {
+            db.Users.ToList();
+            ViewBag.Articles = await db.Articles.ToListAsync();
             return View();
         }
 

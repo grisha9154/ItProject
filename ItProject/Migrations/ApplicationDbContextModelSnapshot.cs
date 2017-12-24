@@ -71,20 +71,44 @@ namespace ItProject.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("ItProject.Models.Articles.Articles", b =>
+            modelBuilder.Entity("ItProject.Models.Articles.Article", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("ApplicationUserId");
+
+                    b.Property<int>("ApplicationUsersId");
+
+                    b.Property<DateTime>("Date");
+
+                    b.Property<string>("Description");
+
                     b.Property<string>("Name");
 
-                    b.Property<string>("ShortDescription");
+                    b.Property<float>("Rating");
 
                     b.Property<string>("Theme");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ApplicationUserId");
+
                     b.ToTable("Articles");
+                });
+
+            modelBuilder.Entity("ItProject.Models.Articles.Comment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("ArticlesId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ArticlesId");
+
+                    b.ToTable("Comments");
                 });
 
             modelBuilder.Entity("ItProject.Models.Articles.Step", b =>
@@ -98,13 +122,13 @@ namespace ItProject.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<int?>("TeamId");
+                    b.Property<string>("Text");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TeamId");
+                    b.HasIndex("ArticleId");
 
-                    b.ToTable("Step");
+                    b.ToTable("Steps");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -215,11 +239,27 @@ namespace ItProject.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("ItProject.Models.Articles.Article", b =>
+                {
+                    b.HasOne("ItProject.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId");
+                });
+
+            modelBuilder.Entity("ItProject.Models.Articles.Comment", b =>
+                {
+                    b.HasOne("ItProject.Models.Articles.Article", "Articles")
+                        .WithMany("Comments")
+                        .HasForeignKey("ArticlesId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("ItProject.Models.Articles.Step", b =>
                 {
-                    b.HasOne("ItProject.Models.Articles.Articles", "Team")
+                    b.HasOne("ItProject.Models.Articles.Article", "Article")
                         .WithMany("Steps")
-                        .HasForeignKey("TeamId");
+                        .HasForeignKey("ArticleId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
