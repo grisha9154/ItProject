@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
+@Html.Partial("_StepList",(List<Step>)(ViewBag.AllSteps))
 <h2>Article</h2>
 @ViewBag.Articles.Name
 <H2>Comments</H2>

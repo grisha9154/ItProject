@@ -28,6 +28,7 @@ namespace ItProject.Controllers
         {
             ViewBag.Articles = db.Articles.Find(id);
             ViewBag.AllComments = db.Comments.Where(c => c.ArticlesId == id).ToList();
+            ViewBag.AllSteps = db.Steps.Where(s => s.ArticleId == id).ToList();
             return View("Article");
         }
     }

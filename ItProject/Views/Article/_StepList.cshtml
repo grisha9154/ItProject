@@ -1,4 +1,11 @@
-﻿
+﻿@using ItProject.Models.Articles
 @{
     Layout = null;
 }
+@model List<Step>
+<ul>
+@foreach (var step in Model)
+{
+    <li>@step.Name</li>
+}
+</ul>
