@@ -1,9 +1,16 @@
-﻿
+﻿@using ItProject.Models.Articles
+
 @{
     ViewData["Title"] = "Article";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
 <h2>Article</h2>
 @ViewBag.Articles.Name
+<H2>Comments</H2>
+@Html.Partial("_CommentList",(List<Comment>)(ViewBag.AllComments))
+
+
+
 

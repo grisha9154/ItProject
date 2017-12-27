@@ -1,0 +1,14 @@
+﻿@using ItProject.Models.Articles
+@using ItProject.Data
+@{
+    Layout = null;
+}
+@model List<Comment>
+
+@foreach(var comment in Model)
+{
+    <div>@comment.Date</div>
+    <div>@comment.Body</div>
+    <div>@comment.ApplicationUser.UserName</div>
+    <div>@comment.CommentLikeUser.Count</div>
+}

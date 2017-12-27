@@ -14,6 +14,7 @@ namespace ItProject.Data
         public DbSet<Article> Articles { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Step> Steps { get; set; }
+        public DbSet<CommentLikeUser> CommentLikeUser { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -23,9 +24,18 @@ namespace ItProject.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            // Customize the ASP.NET Identity model and override the defaults if needed.
-            // For example, you can rename the ASP.NET Identity table names and more.
-            // Add your customizations after calling base.OnModelCreating(builder);
+
+            builder.Entity<CommentLikeUser>().HasKey(t => new { t.CommentId, t.ApplicationUserId });
+
+            builder.Entity<CommentLikeUser>()
+            .HasOne(sc => sc.Comment)
+            .WithMany(s => s.CommentLikeUser)
+            .HasForeignKey(sc => sc.CommentId);
+
+            builder.Entity<CommentLikeUser>()
+            .HasOne(sc => sc.ApplicationUser)
+            .WithMany(c => c.CommentLikeUser)
+            .HasForeignKey(sc => sc.ApplicationUserId);
         }
     }
 }

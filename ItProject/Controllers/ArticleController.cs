@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using ItProject.Models.Articles;
 using ItProject.Models;
 using ItProject.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace ItProject.Controllers
 {
@@ -18,11 +19,15 @@ namespace ItProject.Controllers
             this.db = application;
             db.Articles.ToList();
             db.Users.ToList();
+            db.Comments.ToList();
+            db.Steps.ToList();
+            db.CommentLikeUser.ToList();
         }
         [Route("article/{id:int}")]
         public IActionResult ShowArticle(int id)
         {
             ViewBag.Articles = db.Articles.Find(id);
+            ViewBag.AllComments = db.Comments.Where(c => c.ArticlesId == id).ToList();
             return View("Article");
         }
     }

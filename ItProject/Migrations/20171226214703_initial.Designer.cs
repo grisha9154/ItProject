@@ -11,7 +11,7 @@ using System;
 namespace ItProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20171224223750_initial")]
+    [Migration("20171226214703_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -20,6 +20,19 @@ namespace ItProject.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.0.1-rtm-125")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("ItProject.Data.CommentLikeUser", b =>
+                {
+                    b.Property<int>("CommentId");
+
+                    b.Property<string>("ApplicationUserId");
+
+                    b.HasKey("CommentId", "ApplicationUserId");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.ToTable("CommentLikeUser");
+                });
 
             modelBuilder.Entity("ItProject.Models.ApplicationUser", b =>
                 {
@@ -244,6 +257,19 @@ namespace ItProject.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("ItProject.Data.CommentLikeUser", b =>
+                {
+                    b.HasOne("ItProject.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany("CommentLikeUser")
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("ItProject.Models.Articles.Comment", "Comment")
+                        .WithMany("CommentLikeUser")
+                        .HasForeignKey("CommentId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("ItProject.Models.Articles.Article", b =>
