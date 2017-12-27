@@ -4,13 +4,16 @@
     ViewData["Title"] = "Article";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-@Html.Partial("_StepList",(List<Step>)(ViewBag.AllSteps))
-<h2>Article</h2>
-@ViewBag.Articles.Name
-<H2>Comments</H2>
-@Html.Partial("_CommentList",(List<Comment>)(ViewBag.AllComments))
-
-
+<div class="row">
+    <div class="col-sm-2">
+        @Html.Partial("_StepList", (List<Step>)(ViewBag.AllSteps))
+    </div>
+    <div class="col-sm-4">
+        <h2>Article</h2>
+        @ViewBag.Articles.Name
+        <H2>Comments</H2>
+        @Html.Partial("_CommentList", (List<Comment>)(ViewBag.AllComments))
+    </div>
+</div>
 
 
