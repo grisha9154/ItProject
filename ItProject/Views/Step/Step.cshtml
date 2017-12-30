@@ -11,9 +11,23 @@
         @Html.Partial("../Article/_StepList", Model.ListOfStep)
     </div>
     <div class="col-sm-4">
-        <h2>@Model.Step.Name</h2>
-        @Model.Step.Body
-        <H2>Comments</H2>
-        @Html.Partial("../Article/_CommentList", Model.ListOfComment)
-    </div>
+        <div class="row">
+            <h2>@Model.Step.Name</h2>
+            @Model.Step.Body
+            <div class="col">
+                @if (Model.Step.Id != 1)
+                {
+                   @: <a href="../step/@(Model.Step.Id - 1)" class="btn btn-primary">Previous</a>
+                }
+            </div>
+            <div class="col">
+                @if (Model.Step.Id < Model.ListOfStep.Count)
+                {
+                    @: <a href="../step/@(Model.Step.Id + 1)" class="btn btn-primary">Next</a>
+                }
+            </div>
+        </div>
+            <H2>Comments</H2>
+            @Html.Partial("../Article/_CommentList", Model.ListOfComment)
+        </div>
 </div>
