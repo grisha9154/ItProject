@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ItProject.Models.Articles
+namespace ItProject.Models.ArticleModels
 {
-    public class Article
+    public class ArticleModel
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -13,15 +13,15 @@ namespace ItProject.Models.Articles
         public string Theme { get; set; }
         //  public List<string> Tags { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
-        public List<Comment> Comments { get; set; }
-        public List<Step> Steps { get; set; }
+        public List<CommentModel> Comments { get; set; }
+        public List<StepModel> Steps { get; set; }
         public float Rating { get; set; }
         public DateTime Date { get; set; }
 
-        public Article()
+        public ArticleModel()
         {
-            Steps = new List<Step>();
-            Comments = new List<Comment>();
+            Steps = new List<StepModel>();
+            Comments = new List<CommentModel>();
         }
 
     }

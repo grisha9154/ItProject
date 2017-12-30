@@ -5,15 +5,15 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using ItProject.Models;
-using ItProject.Models.Articles;
+using ItProject.Models.ArticleModels;
 
 namespace ItProject.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public DbSet<Article> Articles { get; set; }
-        public DbSet<Comment> Comments { get; set; }
-        public DbSet<Step> Steps { get; set; }
+        public DbSet<ArticleModel> Articles { get; set; }
+        public DbSet<CommentModel> Comments { get; set; }
+        public DbSet<StepModel> Steps { get; set; }
         public DbSet<CommentLikeUser> CommentLikeUser { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
@@ -23,7 +23,7 @@ namespace ItProject.Data
 
         private IEnumerable<IEnumerable<Object>> FieldToList()
         {
-            return new List<IEnumerable<Object>>() { Articles, Comments, Steps, CommentLikeUser };
+            return new List<IEnumerable<Object>>() { Articles, Comments, Steps, CommentLikeUser,Users };
         }
 
         public void InitialDBComponent()

@@ -11,7 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using ItProject.Data;
 using ItProject.Models;
 using ItProject.Services;
-using ItProject.Models.Articles;
+using ItProject.Models.ArticleModels;
 
 namespace ItProject
 {

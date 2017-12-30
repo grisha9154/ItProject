@@ -1,0 +1,19 @@
+﻿@using ItProject.Models.ArticleViewModels
+@using ItProject.Models.ArticleModels
+@{
+    ViewData["Title"] = "Step";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model StepViewModel
+
+<div class="row">
+    <div class="col-sm-2">
+        @Html.Partial("../Article/_StepList", Model.ListOfStep)
+    </div>
+    <div class="col-sm-4">
+        <h2>@Model.Step.Name</h2>
+        @Model.Step.Body
+        <H2>Comments</H2>
+        @Html.Partial("../Article/_CommentList", Model.ListOfComment)
+    </div>
+</div>

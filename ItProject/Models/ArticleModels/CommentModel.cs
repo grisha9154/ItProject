@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ItProject.Models.Articles
+namespace ItProject.Models.ArticleModels
 {
-    public class Comment
+    public class CommentModel
     {
         public int Id { get; set; }
         public int Like { get; set; }
@@ -15,6 +15,6 @@ namespace ItProject.Models.Articles
         public ApplicationUser ApplicationUser { get; set; }
         public List<CommentLikeUser> CommentLikeUser { get; set; }
         public int ArticlesId { get; set; }
-        public Article Articles { get; set; }
+        public ArticleModel Articles { get; set; }
     }
 }

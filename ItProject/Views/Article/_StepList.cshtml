@@ -1,15 +1,11 @@
-﻿@using ItProject.Models.Articles
+﻿@using ItProject.Models.ArticleModels
 @{
     Layout = null;
 }
-@model List<Step>
+@model List<StepModel>
 <div class="list-group">
 @foreach (var step in Model)
 {
-    @:<form>
-    @:    <input type="hidden" value="@step.Id">
-    @:    <a href="" class="list-group-item list-group-item-action"><input type="submit" value="@step.Name" /></a>
-    @:</form>
-
+     <a href="../step/@step.Id" class="list-group-item list-group-item-action">@step.Name</a>
 }
-</div>
+</div> 

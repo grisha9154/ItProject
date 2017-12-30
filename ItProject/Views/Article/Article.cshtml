@@ -1,4 +1,4 @@
-﻿@using ItProject.Models.Articles
+﻿@using ItProject.Models.ArticleModels
 
 @{
     ViewData["Title"] = "Article";
@@ -6,14 +6,14 @@
 }
 <div class="row">
     <div class="col-sm-2">
-        @Html.Partial("_StepList", (List<Step>)(ViewBag.AllSteps))
+        @Html.Partial("_StepList", (List<StepModel>)(ViewBag.AllSteps))
     </div>
     <div class="col-sm-4">
         <h2>Article</h2>
         @ViewBag.Articles.Name<br>
         @ViewBag.Articles.Description
         <H2>Comments</H2>
-        @Html.Partial("_CommentList", (List<Comment>)(ViewBag.AllComments))
+        @Html.Partial("_CommentList", (List<CommentModel>)(ViewBag.AllComments))
     </div>
 </div>
 

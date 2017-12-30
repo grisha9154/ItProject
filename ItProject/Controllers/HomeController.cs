@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ItProject.Models;
-using ItProject.Models.Articles;
+using ItProject.Models.ArticleModels;
 using ItProject.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,16 +13,16 @@ namespace ItProject.Controllers
 {
     public class HomeController : Controller
     {
-        List<Article> a = new List<Article>
+        List<ArticleModel> a = new List<ArticleModel>
         {
-            new Article
+            new ArticleModel
             {
                 Id = 1,
                 Name = "Работа с WPF",
                 Rating = 5,
                 Description = "Короткий, курс описывающий как парвильно создавать WPF приложжения.",
                 Theme = "С#",
-                Steps = new List<Step>{new Step { Id =0, Name="qwe",Body = "qwe", ArticleId = 0}},
+                Steps = new List<StepModel>{new StepModel { Id =0, Name="qwe",Body = "qwe", ArticleId = 0}},
                 ApplicationUser = new ApplicationUser{Id ="2", UserName = "Петров"},
                 Date = DateTime.Now                
             }
