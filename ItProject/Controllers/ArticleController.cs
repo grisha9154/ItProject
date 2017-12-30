@@ -18,18 +18,18 @@ namespace ItProject.Controllers
         {
             this.db = application;
             db.Articles.ToList();
-            db.Users.ToList();
-            db.Comments.ToList();
-            db.Steps.ToList();
-            db.CommentLikeUser.ToList();
+            db.InitialDBComponent();
         }
         [Route("article/{id:int}")]
         public IActionResult ShowArticle(int id)
         {
             ViewBag.Articles = db.Articles.Find(id);
+            db.Users.ToList();
             ViewBag.AllComments = db.Comments.Where(c => c.ArticlesId == id).ToList();
             ViewBag.AllSteps = db.Steps.Where(s => s.ArticleId == id).ToList();
             return View("Article");
         }
+
+        
     }
 }

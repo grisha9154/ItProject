@@ -21,6 +21,19 @@ namespace ItProject.Data
         {
         }
 
+        private IEnumerable<IEnumerable<Object>> FieldToList()
+        {
+            return new List<IEnumerable<Object>>() { Articles, Comments, Steps, CommentLikeUser };
+        }
+
+        public void InitialDBComponent()
+        {
+            foreach(var list in FieldToList())
+            {
+                list.ToList();
+            }
+        }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
