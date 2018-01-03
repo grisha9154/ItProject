@@ -42,8 +42,12 @@ namespace ItProject.Migrations
 
                     b.Property<string>("City");
 
+                    b.Property<string>("Company");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
+
+                    b.Property<string>("Country");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256);
@@ -76,10 +80,6 @@ namespace ItProject.Migrations
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256);
-
-                    b.Property<string>("Сompany");
-
-                    b.Property<string>("Сountry");
 
                     b.HasKey("Id");
 

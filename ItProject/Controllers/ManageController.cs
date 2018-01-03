@@ -58,7 +58,11 @@ namespace ItProject.Controllers
             {
                 Username = user.UserName,
                 Email = user.Email,
-                PhoneNumber = user.PhoneNumber,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                City = user.City,
+                Country = user.Country,
+                Company = user.Company,
                 IsEmailConfirmed = user.EmailConfirmed,
                 StatusMessage = StatusMessage
             };
@@ -91,13 +95,48 @@ namespace ItProject.Controllers
                 }
             }
 
-            var phoneNumber = user.PhoneNumber;
-            if (model.PhoneNumber != phoneNumber)
+            if (model.FirstName != user.FirstName)
             {
-                var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, model.PhoneNumber);
-                if (!setPhoneResult.Succeeded)
+                var setFirstNameResult = await _userManager.SetFirstNameAsync(user, model.FirstName);
+                if (!setFirstNameResult.Succeeded)
                 {
-                    throw new ApplicationException($"Unexpected error occurred setting phone number for user with ID '{user.Id}'.");
+                    throw new ApplicationException($"Unexpected error occurred setting first name for user with ID '{user.Id}'.");
+                }
+            }
+            
+            if (model.LastName != user.LastName)
+            {
+                var setLastNameResult = await _userManager.SetLastNameAsync(user, model.LastName);
+                if (!setLastNameResult.Succeeded)
+                {
+                    throw new ApplicationException($"Unexpected error occurred setting last name for user with ID '{user.Id}'.");
+                }
+            }
+            
+            if (model.Country != user.Country)
+            {
+                var setLastNameResult = await _userManager.SetCountryAsync(user, model.Country);
+                if (!setLastNameResult.Succeeded)
+                {
+                    throw new ApplicationException($"Unexpected error occurred setting country for user with ID '{user.Id}'.");
+                }
+            }
+
+            if (model.City != user.City)
+            {
+                var setLastNameResult = await _userManager.SetCityAsync(user, model.City);
+                if (!setLastNameResult.Succeeded)
+                {
+                    throw new ApplicationException($"Unexpected error occurred setting city for user with ID '{user.Id}'.");
+                }
+            }
+
+            if (model.Company != user.Company)
+            {
+                var setLastNameResult = await _userManager.SetCompanyAsync(user, model.Company);
+                if (!setLastNameResult.Succeeded)
+                {
+                    throw new ApplicationException($"Unexpected error occurred setting company for user with ID '{user.Id}'.");
                 }
             }
 

@@ -11,7 +11,7 @@ using System;
 namespace ItProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180103131937_initial")]
+    [Migration("20180103161539_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -43,8 +43,12 @@ namespace ItProject.Migrations
 
                     b.Property<string>("City");
 
+                    b.Property<string>("Company");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
+
+                    b.Property<string>("Country");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256);
@@ -77,10 +81,6 @@ namespace ItProject.Migrations
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256);
-
-                    b.Property<string>("Сompany");
-
-                    b.Property<string>("Сountry");
 
                     b.HasKey("Id");
 

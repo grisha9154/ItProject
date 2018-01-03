@@ -28,8 +28,6 @@ namespace ItProject.Controllers
             }
         };
 
-        ApplicationUser user;
-
         private ApplicationDbContext db;
         public HomeController(ApplicationDbContext application)
         {

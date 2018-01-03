@@ -16,10 +16,21 @@ namespace ItProject.Models.ManageViewModels
         [EmailAddress]
         public string Email { get; set; }
 
-        [Phone]
-        [Display(Name = "Phone number")]
-        public string PhoneNumber { get; set; }
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
 
+        [Display(Name = "Last Name")]
+        public string LastName { get; set; }
+
+        [Display(Name = "Country")]
+        public string Country { get; set; }
+
+        [Display(Name = "City")]
+        public string City { get; set; }
+
+        [Display(Name ="Company")]
+        public string Company { get; set; }
+      
         public string StatusMessage { get; set; }
     }
 }
