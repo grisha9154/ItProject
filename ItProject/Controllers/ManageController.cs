@@ -46,6 +46,12 @@ namespace ItProject.Controllers
         public string StatusMessage { get; set; }
 
         [HttpGet]
+        public async Task<IActionResult> Article()
+        {
+            return View();
+        }
+
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             var user = await _userManager.GetUserAsync(User);
