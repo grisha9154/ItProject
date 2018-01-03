@@ -11,7 +11,7 @@ using System;
 namespace ItProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180103161539_initial")]
+    [Migration("20180103204801_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -285,14 +285,14 @@ namespace ItProject.Migrations
             modelBuilder.Entity("ItProject.Models.ArticleModels.ArticleModel", b =>
                 {
                     b.HasOne("ItProject.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany()
+                        .WithMany("Articles")
                         .HasForeignKey("ApplicationUserId");
                 });
 
             modelBuilder.Entity("ItProject.Models.ArticleModels.CommentModel", b =>
                 {
                     b.HasOne("ItProject.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany()
+                        .WithMany("Comments")
                         .HasForeignKey("ApplicationUserId");
 
                     b.HasOne("ItProject.Models.ArticleModels.ArticleModel", "Articles")

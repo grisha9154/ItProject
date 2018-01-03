@@ -13,6 +13,7 @@ using Microsoft.Extensions.Options;
 using ItProject.Models;
 using ItProject.Models.ManageViewModels;
 using ItProject.Services;
+using ItProject.Data;
 
 namespace ItProject.Controllers
 {
@@ -25,6 +26,7 @@ namespace ItProject.Controllers
         private readonly IEmailSender _emailSender;
         private readonly ILogger _logger;
         private readonly UrlEncoder _urlEncoder;
+        private readonly ApplicationDbContext _db;
 
         private const string AuthenicatorUriFormat = "otpauth://totp/{0}:{1}?secret={2}&issuer={0}&digits=6";
 
@@ -33,32 +35,54 @@ namespace ItProject.Controllers
           SignInManager<ApplicationUser> signInManager,
           IEmailSender emailSender,
           ILogger<ManageController> logger,
-          UrlEncoder urlEncoder)
+          UrlEncoder urlEncoder, 
+          ApplicationDbContext application
+          )
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
             _logger = logger;
             _urlEncoder = urlEncoder;
+            _db = application;
+            _db.InitialDBComponent();
         }
 
         [TempData]
         public string StatusMessage { get; set; }
 
-        [HttpGet]
-        public async Task<IActionResult> Article()
-        {
-            return View();
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> Index()
+        private async Task<ApplicationUser> GetUser()
         {
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
                 throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
+            return user;
+        }
+
+        [Route("{id:int}")]
+        public async Task<IActionResult> DeleteArticle(int id)
+        {
+            _db.Articles.Remove(_db.Articles.Find(id));
+            await _db.SaveChangesAsync();
+            var user = await GetUser();
+            var model = user.Articles.ToList();
+            return View("Article", model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Article()
+        {
+            var user =await GetUser();
+            var model = user.Articles.ToList();
+            return View(model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Index()
+        {
+            var user = await GetUser();
 
             var model = new IndexViewModel
             {

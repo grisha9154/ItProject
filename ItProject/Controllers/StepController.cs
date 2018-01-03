@@ -15,7 +15,6 @@ namespace ItProject.Controllers
         public StepController(ApplicationDbContext application)
         {
             this.db = application;
-            db.Articles.ToList();
             db.InitialDBComponent();
         }
 

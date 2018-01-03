@@ -284,14 +284,14 @@ namespace ItProject.Migrations
             modelBuilder.Entity("ItProject.Models.ArticleModels.ArticleModel", b =>
                 {
                     b.HasOne("ItProject.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany()
+                        .WithMany("Articles")
                         .HasForeignKey("ApplicationUserId");
                 });
 
             modelBuilder.Entity("ItProject.Models.ArticleModels.CommentModel", b =>
                 {
                     b.HasOne("ItProject.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany()
+                        .WithMany("Comments")
                         .HasForeignKey("ApplicationUserId");
 
                     b.HasOne("ItProject.Models.ArticleModels.ArticleModel", "Articles")
