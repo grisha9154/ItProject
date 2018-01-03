@@ -228,10 +228,7 @@ namespace ItProject.Controllers
                     "Account",
                     new { userId = user.Id, code = code },
                     protocol: HttpContext.Request.Scheme);
-                    EmailService emailService = new EmailService();
-                    await emailService.SendEmailAsync(model.Email, "Confirm your account",
-                    $"Подтвердите регистрацию, перейдя по ссылке: <a href='{callbackUrl}'>link</a>");
-
+                    await _emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
                     // await _signInManager.SignInAsync(user, isPersistent: false);
                     return RedirectToLocal(returnUrl);
                 }
