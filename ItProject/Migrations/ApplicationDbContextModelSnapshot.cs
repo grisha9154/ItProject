@@ -40,6 +40,8 @@ namespace ItProject.Migrations
 
                     b.Property<int>("AccessFailedCount");
 
+                    b.Property<string>("City");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
@@ -47,6 +49,10 @@ namespace ItProject.Migrations
                         .HasMaxLength(256);
 
                     b.Property<bool>("EmailConfirmed");
+
+                    b.Property<string>("FirstName");
+
+                    b.Property<string>("LastName");
 
                     b.Property<bool>("LockoutEnabled");
 
@@ -71,6 +77,10 @@ namespace ItProject.Migrations
                     b.Property<string>("UserName")
                         .HasMaxLength(256);
 
+                    b.Property<string>("Сompany");
+
+                    b.Property<string>("Сountry");
+
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
@@ -84,7 +94,7 @@ namespace ItProject.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("ItProject.Models.Articles.Article", b =>
+            modelBuilder.Entity("ItProject.Models.ArticleModels.ArticleModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -108,7 +118,7 @@ namespace ItProject.Migrations
                     b.ToTable("Articles");
                 });
 
-            modelBuilder.Entity("ItProject.Models.Articles.Comment", b =>
+            modelBuilder.Entity("ItProject.Models.ArticleModels.CommentModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -132,7 +142,7 @@ namespace ItProject.Migrations
                     b.ToTable("Comments");
                 });
 
-            modelBuilder.Entity("ItProject.Models.Articles.Step", b =>
+            modelBuilder.Entity("ItProject.Models.ArticleModels.StepModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -265,34 +275,34 @@ namespace ItProject.Migrations
                         .HasForeignKey("ApplicationUserId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("ItProject.Models.Articles.Comment", "Comment")
+                    b.HasOne("ItProject.Models.ArticleModels.CommentModel", "Comment")
                         .WithMany("CommentLikeUser")
                         .HasForeignKey("CommentId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("ItProject.Models.Articles.Article", b =>
+            modelBuilder.Entity("ItProject.Models.ArticleModels.ArticleModel", b =>
                 {
                     b.HasOne("ItProject.Models.ApplicationUser", "ApplicationUser")
                         .WithMany()
                         .HasForeignKey("ApplicationUserId");
                 });
 
-            modelBuilder.Entity("ItProject.Models.Articles.Comment", b =>
+            modelBuilder.Entity("ItProject.Models.ArticleModels.CommentModel", b =>
                 {
                     b.HasOne("ItProject.Models.ApplicationUser", "ApplicationUser")
                         .WithMany()
                         .HasForeignKey("ApplicationUserId");
 
-                    b.HasOne("ItProject.Models.Articles.Article", "Articles")
+                    b.HasOne("ItProject.Models.ArticleModels.ArticleModel", "Articles")
                         .WithMany("Comments")
                         .HasForeignKey("ArticlesId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("ItProject.Models.Articles.Step", b =>
+            modelBuilder.Entity("ItProject.Models.ArticleModels.StepModel", b =>
                 {
-                    b.HasOne("ItProject.Models.Articles.Article", "Article")
+                    b.HasOne("ItProject.Models.ArticleModels.ArticleModel", "Article")
                         .WithMany("Steps")
                         .HasForeignKey("ArticleId")
                         .OnDelete(DeleteBehavior.Cascade);

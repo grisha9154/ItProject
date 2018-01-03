@@ -23,6 +23,7 @@ namespace ItProject.Controllers
         public IActionResult ShowStep(int stepId)
         {
             var stepViewModel = new StepViewModel();
+            stepViewModel.Test();
             stepViewModel.SetAllParams(db, stepId);
             return View("Step", stepViewModel);
         }

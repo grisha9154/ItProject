@@ -27,5 +27,9 @@ namespace ItProject.Models.ArticleViewModels
         {
             Step = db.Steps.Find(stepId);
         }
+        public void Test()
+        {
+            var a = CommonMark.CommonMarkConverter.Convert("qwe");
+        }
     }  
 }
