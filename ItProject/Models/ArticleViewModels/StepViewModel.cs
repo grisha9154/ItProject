@@ -25,11 +25,8 @@ namespace ItProject.Models.ArticleViewModels
 
         public void SetAllParams(ApplicationDbContext db, int stepId)
         {
+            db.InitialDBComponent();
             Step = db.Steps.Find(stepId);
-        }
-        public void Test()
-        {
-            var a = CommonMark.CommonMarkConverter.Convert("qwe");
         }
     }  
 }

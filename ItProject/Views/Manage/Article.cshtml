@@ -8,7 +8,7 @@
 <h2>Article</h2>
     @foreach (var article in Model)
     {
-        @:<button asp-action="" class="btn btn-link">@article.Name</button><a href="DeleteArticle/@article.Id" class="btn">delete</a>
+        @:<a asp-action="UpdateArticle/@article.Id" class="btn btn-link">@article.Name</a><a href="DeleteArticle/@article.Id" class="btn">delete</a>
     }
 
 

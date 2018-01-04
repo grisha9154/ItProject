@@ -1,11 +1,14 @@
 ﻿@using ItProject.Models.ArticleModels
 @{
     Layout = null;
+    int i = 1;
 }
 @model List<StepModel>
 <div class="list-group">
+  
 @foreach (var step in Model)
 {
-     <a href="../step/@step.Id" class="list-group-item list-group-item-action">@(step.Id). @step.Name</a>
+     <a href="../step/@step.Id" class="list-group-item list-group-item-action">@i. @step.Name</a>
+    i++;
 }
 </div> 

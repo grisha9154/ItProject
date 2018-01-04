@@ -15,15 +15,15 @@
             <h2>@Model.Step.Name</h2>
            @Html.Raw(CommonMark.CommonMarkConverter.Convert(Model.Step.Body))
             <div class="col">
-                @if (Model.Step.Id != 1)
+                @if (Model.ListOfStep.IndexOf(Model.Step) != 0)
                 {
-                   @: <a href="../step/@(Model.Step.Id - 1)" class="btn btn-primary">Previous</a>
+                   @: <a href="../step/@(((Model.ListOfStep.ToArray())[Model.ListOfStep.IndexOf(Model.Step)-1]).Id)" class="btn btn-primary">Previous</a>
                 }
             </div>
             <div class="col">
-                @if (Model.Step.Id < Model.ListOfStep.Count)
+                @if (Model.ListOfStep.IndexOf(Model.Step) < Model.ListOfStep.Count-1)
                 {
-                    @: <a href="../step/@(Model.Step.Id + 1)" class="btn btn-primary">Next</a>
+                    @: <a href="../step/@(((Model.ListOfStep.ToArray())[Model.ListOfStep.IndexOf(Model.Step)+1]).Id)" class="btn btn-primary">Next</a>
                 }
             </div>
         </div>
