@@ -1,14 +1,20 @@
-﻿@using ItProject.Models.ArticleModels
+﻿@using ItProject.Models.ArticleViewModels
 @{
     Layout = null;
     int i = 1;
 }
-@model List<StepModel>
+@model StepViewModel
 <div class="list-group">
   
-@foreach (var step in Model)
+@foreach (var step in Model.ListOfStep)
 {
-     <a href="../step/@step.Id" class="list-group-item list-group-item-action">@i. @step.Name</a>
-    i++;
+    if (step.Id != Model.Step.Id)
+    {
+        <a asp-controller="Step" asp-action="ShowStep" asp-route-id="@step.Id" class="list-group-item list-group-item-action">@(i++). @step.Name</a>
+    }
+    else
+    {
+        <a asp-controller="Step" asp-action="ShowStep" asp-route-id="@step.Id" class="list-group-item list-group-item-action active">@(i++). @step.Name</a>
+    }
 }
 </div> 

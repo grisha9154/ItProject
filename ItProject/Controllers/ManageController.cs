@@ -86,8 +86,35 @@ namespace ItProject.Controllers
             {
                 dbArticle.Theme = article.Theme;
             }
+            dbArticle.Date = DateTime.Now;
             _db.SaveChanges();
             return View(dbArticle);
+        }
+
+        [HttpGet]
+        public IActionResult UpdateStep(int id)
+        {
+            var model = _db.Steps.Find(id);
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult UpdateStep(StepUpdateViewModel step)
+        {
+            var dbStep = _db.Steps.Find(step.Id);
+
+            if(step.Name != dbStep.Name)
+            {
+                dbStep.Name = step.Name;
+            }
+            if(step.Body != dbStep.Body)
+            {
+                dbStep.Body = step.Body;
+            }
+            dbStep.Date = DateTime.Now;
+            dbStep.Article.Date = dbStep.Date;
+            _db.SaveChanges();
+            return View(dbStep);
         }
 
         [Route("{id:int}")]

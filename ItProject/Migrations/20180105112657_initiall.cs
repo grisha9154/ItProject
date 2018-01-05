@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace ItProject.Migrations
 {
-    public partial class initial : Migration
+    public partial class initiall : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -220,6 +220,7 @@ namespace ItProject.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ArticleId = table.Column<int>(nullable: false),
                     Body = table.Column<string>(nullable: true),
+                    Date = table.Column<DateTime>(nullable: false),
                     Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>

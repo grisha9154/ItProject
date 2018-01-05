@@ -17,12 +17,11 @@ namespace ItProject.Controllers
             this.db = application;
             db.InitialDBComponent();
         }
-
-        [Route("step/{stepId:int}")]
-        public IActionResult ShowStep(int stepId)
+        
+        public IActionResult ShowStep(int id)
         {
             var stepViewModel = new StepViewModel();
-            stepViewModel.SetAllParams(db, stepId);
+            stepViewModel.SetAllParams(db, id);
             return View("Step", stepViewModel);
         }
     }

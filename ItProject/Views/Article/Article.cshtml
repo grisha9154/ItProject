@@ -1,12 +1,17 @@
 ﻿@using ItProject.Models.ArticleModels
-
+@using ItProject.Models.ArticleViewModels
 @{
     ViewData["Title"] = "Article";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var steps = new StepViewModel();
+    if (ViewBag.AllSteps.Count > 0)
+    {
+        steps.Step = ViewBag.AllSteps[0];
+    }
 }
 <div class="row">
     <div class="col-sm-2">
-        @Html.Partial("_StepList", (List<StepModel>)(ViewBag.AllSteps))
+        @Html.Partial("_StepList", (steps))
     </div>
     <div class="col-sm-4">
         <h2>Article</h2>

@@ -11,8 +11,8 @@ using System;
 namespace ItProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180103204801_initial")]
-    partial class initial
+    [Migration("20180105112657_initiall")]
+    partial class initiall
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -151,6 +151,8 @@ namespace ItProject.Migrations
                     b.Property<int>("ArticleId");
 
                     b.Property<string>("Body");
+
+                    b.Property<DateTime>("Date");
 
                     b.Property<string>("Name");
 

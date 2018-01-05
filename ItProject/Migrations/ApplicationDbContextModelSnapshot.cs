@@ -151,6 +151,8 @@ namespace ItProject.Migrations
 
                     b.Property<string>("Body");
 
+                    b.Property<DateTime>("Date");
+
                     b.Property<string>("Name");
 
                     b.HasKey("Id");

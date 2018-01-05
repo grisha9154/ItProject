@@ -12,5 +12,6 @@ namespace ItProject.Models.ArticleModels
         public string Body { get; set; }
         public int ArticleId { get; set; }
         public ArticleModel Article { get; set; } 
+        public DateTime Date { get; set; }
     }
 }

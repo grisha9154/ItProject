@@ -3,29 +3,42 @@
 @{
     ViewData["Title"] = "Profile";
     ViewData.AddActivePage(ManageNavPages.Article);
+    int i = 1;
 }
 
 <h2>@Model.Name</h2>
+<div class="row">
+    <div class="col">
+        <form action="../UpdateArticle" method="post">
 
-<form action="../UpdateArticle" method="post">
-    <div class="form-group">
-        <h3>
-            Name:
-        </h3>
-        <input name="Name" type="text" value="@Model.Name" />
-        <input type="hidden" name="Id" value="@Model.Id">
+            <div class="form-group">
+                <h3>
+                    Name:
+                </h3>
+                <input name="Name" type="text" value="@Model.Name" />
+                <input type="hidden" name="Id" value="@Model.Id">
+            </div>
+            <div class="form-group">
+                <h3>
+                    Description:
+                </h3>
+                <textarea name="Description" cols="70" rows="10">@Model.Description</textarea>
+            </div>
+            <div class="form-group">
+                <h3>
+                    Theme:
+                </h3>
+                <input name="Theme" type="text" value="@Model.Theme">
+            </div>
+            <input type="submit" value="Update">
+        </form>
     </div>
-    <div class="form-group">
-        <h3>
-            Description:
-        </h3>
-        <textarea name="Description" cols="70" rows="10">@Model.Description</textarea>
+    <div class="col">
+        <div class="list-group">
+            @foreach (var step in Model.Steps)
+            {
+                <a asp-controller ="Manage" asp-action="UpdateStep" asp-route-id="@step.Id" class="list-group-item list-group-item-action">@(i++). @step.Name</a>
+            }
+        </div> 
     </div>
-    <div class="form-group">
-        <h3>
-            Theme:
-        </h3>
-        <input name="Theme" type="text" value="@Model.Theme">
-    </div>
-    <input type="submit" value="Update">
-</form>
+</div>
