@@ -8,7 +8,8 @@
 <h2>Article</h2>
     @foreach (var article in Model)
     {
-        @:<a asp-action="UpdateArticle/@article.Id" class="btn btn-link">@article.Name</a><a href="DeleteArticle/@article.Id" class="btn">delete</a>
+        <a asp-controller="Manage" asp-action="UpdateArticle" asp-route-id="@article.Id" class="btn btn-link">@article.Name</a>
+        <a asp-controller="Manage" asp-action="DeleteArticle" asp-route-id="@article.Id" class="btn">delete</a>
     }
 
 

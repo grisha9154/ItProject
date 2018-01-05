@@ -35,7 +35,7 @@ namespace ItProject.Controllers
           SignInManager<ApplicationUser> signInManager,
           IEmailSender emailSender,
           ILogger<ManageController> logger,
-          UrlEncoder urlEncoder, 
+          UrlEncoder urlEncoder,
           ApplicationDbContext application
           )
         {
@@ -59,6 +59,20 @@ namespace ItProject.Controllers
                 throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
             return user;
+        }
+
+        [Route("{id:int}")]
+        public IActionResult UpdateArticle(int id)
+        {
+            var model = _db.Articles.Find(id);
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateArticle(Test t)
+        {
+            int i = 0;
+            return View();
         }
 
         [Route("{id:int}")]
