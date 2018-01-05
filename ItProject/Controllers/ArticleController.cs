@@ -7,6 +7,7 @@ using ItProject.Models.ArticleModels;
 using ItProject.Models;
 using ItProject.Data;
 using Microsoft.EntityFrameworkCore;
+using ItProject.Models.ArticleViewModels;
 
 namespace ItProject.Controllers
 {

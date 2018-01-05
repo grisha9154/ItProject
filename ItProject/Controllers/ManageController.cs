@@ -14,6 +14,7 @@ using ItProject.Models;
 using ItProject.Models.ManageViewModels;
 using ItProject.Services;
 using ItProject.Data;
+using ItProject.Models.ArticleViewModels;
 
 namespace ItProject.Controllers
 {
@@ -61,6 +62,7 @@ namespace ItProject.Controllers
             return user;
         }
 
+        [HttpGet]
         [Route("{id:int}")]
         public IActionResult UpdateArticle(int id)
         {
@@ -69,10 +71,23 @@ namespace ItProject.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> UpdateArticle(Test t)
+        public IActionResult UpdateArticle (ArticleUpdateViewModel article)
         {
-            int i = 0;
-            return View();
+            var dbArticle = _db.Articles.Find(article.Id);
+            if (article.Description != dbArticle.Description)
+            {
+                dbArticle.Description = article.Description;
+            }
+            if (article.Name!= dbArticle.Name)
+            {
+                dbArticle.Name = article.Name;
+            }
+            if(article.Theme!= dbArticle.Theme)
+            {
+                dbArticle.Theme = article.Theme;
+            }
+            _db.SaveChanges();
+            return View(dbArticle);
         }
 
         [Route("{id:int}")]
