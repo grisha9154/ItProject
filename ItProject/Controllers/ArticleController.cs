@@ -22,6 +22,15 @@ namespace ItProject.Controllers
             db.InitialDBComponent();
         }
 
+        [HttpPost]
+        public IActionResult CreateComment(CommentCreateViewModel comment)
+        {
+            var currentUser = db.Users.Where(user => user.UserName == User.Identity.Name).Single();
+            db.Comments.Add(new CommentModel(comment.Body,currentUser,comment.ArticleId));
+            db.SaveChanges();
+            return View();
+        }
+
         [Route("article/{id:int}")]
         public IActionResult ShowArticle(int id)
         {

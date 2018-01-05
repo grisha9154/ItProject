@@ -3,15 +3,29 @@
 @{
     Layout = null;
 }
-@model List<CommentModel>
+@model ArticleModel
 
-@if (Model.Count > 0)
+@if (Model.Comments.Count > 0)
 {
-    @foreach (var comment in Model)
-    {
-        <div>@comment.Date</div>
-        <div>@comment.Body</div>
-        <div>@comment.ApplicationUser.UserName</div>
-        <div>@comment.CommentLikeUser.Count</div>
-    }
+    <div class="col">
+        <div class="row">
+            <form action="../Article/CreateComment" method="post">
+                <textarea name="Body" cols="70" rows="5"></textarea>   
+                <input name="ArticleId" type="hidden"  value="@Model.Id"/>
+                <input type="submit" value="Coment" />
+            </form>
+        </div>
+        <div class="row">
+            <div class="col">
+                @foreach (var comment in Model.Comments)
+                {
+                        <div class= "row">@comment.Date</div>
+                        <div class= "row">@comment.Body</div>
+                        <div class= "row">@comment.ApplicationUser.UserName</div>
+                        <div class= "row">@comment.CommentLikeUser.Count</div>
+                }
+            </div>
+
+        </div>
+    </div>
 }

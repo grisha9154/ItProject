@@ -16,5 +16,20 @@ namespace ItProject.Models.ArticleModels
         public List<CommentLikeUser> CommentLikeUser { get; set; }
         public int ArticlesId { get; set; }
         public ArticleModel Articles { get; set; }
+        
+        public CommentModel()
+        {
+            CommentLikeUser = new List<Data.CommentLikeUser>();
+        }
+
+        public CommentModel(string body, ApplicationUser user,int articleId)
+        {
+            Like = 0;
+            Body = body;
+            Date = DateTime.Now;
+            ApplicationUser = user;
+            ArticlesId = articleId;
+            CommentLikeUser = new List<Data.CommentLikeUser>();
+        }
     }
 }

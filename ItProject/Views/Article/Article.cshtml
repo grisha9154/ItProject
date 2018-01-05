@@ -18,7 +18,7 @@
         @ViewBag.Articles.Name<br>
         @ViewBag.Articles.Description
         <H2>Comments</H2>
-        @Html.Partial("_CommentList", (List<CommentModel>)(ViewBag.AllComments))
+        @Html.Partial("_CommentList", (ArticleModel)(ViewBag.Articles))
     </div>
 </div>
 
