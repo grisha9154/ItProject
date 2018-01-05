@@ -64,6 +64,21 @@ namespace ItProject.Controllers
         }
 
         [HttpGet]
+        public IActionResult CreateStep(int id)
+        {
+            var model = _db.Articles.Find(id);
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult CreateStep(StepCreateViewModel step)
+        {
+            _db.Steps.Add(new StepModel(step));
+            _db.SaveChanges();
+            return View(_db.Articles.Find(step.ArticleId));
+        }
+
+        [HttpGet]
         public IActionResult CreateArticle()
         {
             return View();

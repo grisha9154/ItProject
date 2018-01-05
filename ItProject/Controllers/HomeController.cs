@@ -13,21 +13,6 @@ namespace ItProject.Controllers
 {
     public class HomeController : Controller
     {
-        List<ArticleModel> a = new List<ArticleModel>
-        {
-            new ArticleModel
-            {
-                Id = 1,
-                Name = "Работа с WPF",
-                Rating = 5,
-                Description = "Короткий, курс описывающий как парвильно создавать WPF приложжения.",
-                Theme = "С#",
-                Steps = new List<StepModel>{new StepModel { Id =0, Name="qwe",Body = "qwe", ArticleId = 0}},
-                ApplicationUser = new ApplicationUser{Id ="2", UserName = "Петров"},
-                Date = DateTime.Now                
-            }
-        };
-
         private ApplicationDbContext db;
         public HomeController(ApplicationDbContext application)
         {

@@ -1,0 +1,46 @@
+﻿@using ItProject.Models.ArticleModels
+@model ArticleModel
+@{
+    ViewData["Title"] = "Profile";
+    ViewData.AddActivePage(ManageNavPages.Article);
+    int i = 1;
+}
+
+<h2>CreateStep</h2>
+
+<div class="row">
+    <div class="col">
+        <form action="~/Manage/CreateStep" method="post">
+            <div class="form-group">
+                <h3>
+                    Name:
+                </h3>
+                <input name="Name" type="text" />
+                <input name="ArticleId" value="@Model.Id" type="hidden" />
+            </div>
+            <div class="form-group">
+                <h3>
+                    Description:
+                </h3>
+                <textarea name="Body" cols="70" rows="10"></textarea>
+            </div>
+            <input type="submit" value="Create">
+        </form>
+    </div>
+    <div class="col">
+        <div class="list-group">
+            @foreach (var step in Model.Steps)
+            {
+                if (step.Id != Model.Id)
+                {
+                    <a asp-controller="Manage" asp-action="UpdateStep" asp-route-id="@step.Id" class="list-group-item list-group-item-action">@(i++). @step.Name</a>
+                }
+                else
+                {
+                    <a asp-controller="Manage" asp-action="UpdateStep" asp-route-id="@step.Id" class="list-group-item list-group-item-action active">@(i++). @step.Name</a>
+                }
+            }
+        </div>
+        <a asp-controller="Manage" asp-action="UpdateArticle" asp-route-id="@Model.Id" class="btn-block">Article: @(Model.Name)</a>
+    </div>
+</div>

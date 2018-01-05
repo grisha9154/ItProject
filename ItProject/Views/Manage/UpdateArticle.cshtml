@@ -39,6 +39,7 @@
             {
                 <a asp-controller ="Manage" asp-action="UpdateStep" asp-route-id="@step.Id" class="list-group-item list-group-item-action">@(i++). @step.Name</a>
             }
-        </div> 
+        </div>
+        <a asp-controller ="Manage" asp-action="CreateStep" asp-route-id="@Model.Id" class="btn-block">Create Step</a>
     </div>
 </div>
