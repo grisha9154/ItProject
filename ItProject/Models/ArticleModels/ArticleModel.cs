@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ItProject.Models.ArticleViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -23,6 +24,15 @@ namespace ItProject.Models.ArticleModels
             Steps = new List<StepModel>();
             Comments = new List<CommentModel>();
         }
-
+        public ArticleModel (ArticleCreateViewModel article,ApplicationUser user)
+        {
+            Name = article.Name;
+            Description = article.Description;
+            Theme = article.Theme;
+            ApplicationUser = user;
+            Date = DateTime.Now;
+            Steps = new List<StepModel>();
+            Comments = new List<CommentModel>();
+        }
     }
 }

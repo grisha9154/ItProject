@@ -6,10 +6,16 @@
 }
 
 <h2>Article</h2>
-    @foreach (var article in Model)
-    {
-        <a asp-controller="Manage" asp-action="UpdateArticle" asp-route-id="@article.Id" class="btn btn-link">@article.Name</a>
-        <a asp-controller="Manage" asp-action="DeleteArticle" asp-route-id="@article.Id" class="btn">delete</a>
-    }
-
+<div class="row">
+    <div class="col">
+        @foreach (var article in Model)
+        {
+            <a asp-controller="Manage" asp-action="UpdateArticle" asp-route-id="@article.Id" class="btn btn-link">@article.Name</a>
+            <a asp-controller="Manage" asp-action="DeleteArticle" asp-route-id="@article.Id" class="btn">delete</a>
+        }
+    </div>
+    <div class="col">
+        <a asp-controller="Manage" asp-action="CreateArticle" class="btn">Create</a>
+    </div>
+</div>
 

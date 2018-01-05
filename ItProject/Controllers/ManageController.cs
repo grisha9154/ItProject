@@ -15,6 +15,7 @@ using ItProject.Models.ManageViewModels;
 using ItProject.Services;
 using ItProject.Data;
 using ItProject.Models.ArticleViewModels;
+using ItProject.Models.ArticleModels;
 
 namespace ItProject.Controllers
 {
@@ -60,6 +61,21 @@ namespace ItProject.Controllers
                 throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
             return user;
+        }
+
+        [HttpGet]
+        public IActionResult CreateArticle()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CreateArticle(ArticleCreateViewModel article)
+        {
+            var currentUser = _db.Users.Where(user => user.UserName == User.Identity.Name).Single();
+            var res = _db.Articles.Add(new ArticleModel(article, currentUser));
+            _db.SaveChanges();
+            return View("UpdateArticle", res.Entity);
         }
 
         [HttpGet]
