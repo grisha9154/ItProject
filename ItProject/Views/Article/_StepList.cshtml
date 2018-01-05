@@ -6,15 +6,18 @@
 @model StepViewModel
 <div class="list-group">
   
-@foreach (var step in Model.ListOfStep)
+@if (Model.Step != null)
 {
-    if (step.Id != Model.Step.Id)
+    @foreach (var step in Model.ListOfStep)
     {
-        <a asp-controller="Step" asp-action="ShowStep" asp-route-id="@step.Id" class="list-group-item list-group-item-action">@(i++). @step.Name</a>
-    }
-    else
-    {
-        <a asp-controller="Step" asp-action="ShowStep" asp-route-id="@step.Id" class="list-group-item list-group-item-action active">@(i++). @step.Name</a>
+        if (step.Id != Model.Step.Id)
+        {
+            <a asp-controller="Step" asp-action="ShowStep" asp-route-id="@step.Id" class="list-group-item list-group-item-action">@(i++). @step.Name</a>
+        }
+        else
+        {
+            <a asp-controller="Step" asp-action="ShowStep" asp-route-id="@step.Id" class="list-group-item list-group-item-action active">@(i++). @step.Name</a>
+        }
     }
 }
 </div> 
