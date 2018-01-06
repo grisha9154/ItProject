@@ -1,0 +1,36 @@
+﻿@using ItProject.Models.ArticleModels
+@using ItProject.Data
+@{
+    Layout = null;
+   var key = Model.ArticleUserRating.Where(a => (a.User.UserName == User.Identity.Name) && (a.ArticleId == Model.Id)).SingleOrDefault();
+}
+@model ArticleModel
+<script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+<form asp-controller="Article" asp-action="AddRating" method="post" class="form-horizontal">
+    <div class="form-group">
+        <div class="col-lg-8">
+            <span class="rating">
+                @for (int i = 1; i <= 5; i++)
+                {
+                    var starClass = "star";
+                    if (Model.Rating == 6 - i)
+                    {
+                        starClass += " active";
+                    }
+                    <span data-value="@(6 - i)" class="@starClass"></span>
+                }
+            </span>
+        </div>
+        <input asp-for="Id" type="hidden" />
+        <input asp-for="Rating" type="hidden"/>
+    </div>
+    @if (key == null)
+    {
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-primary" value="Submit" />
+        </div>
+    </div>
+    }
+</form>
+<script src="~/js/rating.js"></script>

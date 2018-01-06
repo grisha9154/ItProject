@@ -17,6 +17,7 @@ namespace ItProject.Data
         public DbSet<Tag>Tags { get; set; }
         public DbSet<CommentLikeUser> CommentLikeUser { get; set; }
         public DbSet<TagArticle> TagArticle { get; set; }
+        public DbSet<ArticleUserRating> ArticleUserRating { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -25,7 +26,7 @@ namespace ItProject.Data
 
         private IEnumerable<IEnumerable<Object>> FieldToList()
         {
-            return new List<IEnumerable<Object>>() { Articles, Comments, Steps, CommentLikeUser,Users,Tags };
+            return new List<IEnumerable<Object>>() { Articles, Comments, Steps, CommentLikeUser,Users,Tags,ArticleUserRating };
         }
 
         public void InitialDBComponent()
@@ -64,6 +65,18 @@ namespace ItProject.Data
                 .HasOne(sc => sc.Tag)
                 .WithMany(s => s.Articles)
                 .HasForeignKey(sc => sc.TagId);
+
+            builder.Entity<ArticleUserRating>().HasKey(t => new { t.ArticleId, t.UserId });
+
+            builder.Entity<ArticleUserRating>()
+                .HasOne(sc => sc.Article)
+                .WithMany(s => s.ArticleUserRating)
+                .HasForeignKey(sc => sc.ArticleId);
+
+            builder.Entity<ArticleUserRating>()
+                .HasOne(sc => sc.User)
+                .WithMany(s => s.ArticleUserRating)
+                .HasForeignKey(sc => sc.UserId);
         }
     }
 }

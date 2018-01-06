@@ -15,6 +15,8 @@ select * from CommentLikeUser;
 delete AspNetUsers where Id = 'b7db08c5-485d-4bb5-af48-487b6bf3ca66';
 select * from AspNetUsers
 select * from Articles;
+select * from Tags;
+select * from TagArticle
 select * from Steps;
 select * from Comments;
 

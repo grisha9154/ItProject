@@ -1,24 +1,32 @@
 ﻿@using ItProject.Models.ArticleModels
 @using ItProject.Models.ArticleViewModels
+@model ArticleModel
 @{
     ViewData["Title"] = "Article";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var steps = new StepViewModel();
-    if (ViewBag.AllSteps.Count > 0)
+    if (Model.Steps.Count > 0)
     {
-        steps.Step = ViewBag.AllSteps[0];
+        steps.Step = Model.Steps[0];
     }
 }
 <div class="row">
     <div class="col-sm-2">
         @Html.Partial("_StepList", (steps))
     </div>
-    <div class="col-sm-4">
-        <h2>Article</h2>
-        @ViewBag.Articles.Name<br>
-        @ViewBag.Articles.Description
+    <div class="col-sm-8">
+        <div class="row">
+            <div class="col">
+                <h2>Article</h2>
+            </div>
+            <div class="col">
+                @Html.Partial("_Rating",Model)
+            </div>
+        </div>
+        @Model.Name<br>
+        @Model.Description
         <H2>Comments</H2>
-        @Html.Partial("_CommentList", (ArticleModel)(ViewBag.Articles))
+        @Html.Partial("_CommentList", Model)
     </div>
 </div>
 

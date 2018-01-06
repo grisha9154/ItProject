@@ -17,6 +17,7 @@ namespace ItProject.Models.ArticleModels
         public ApplicationUser ApplicationUser { get; set; }
         public List<CommentModel> Comments { get; set; }
         public List<StepModel> Steps { get; set; }
+        public List<ArticleUserRating> ArticleUserRating { get; set; }
         public float Rating { get; set; }
         public DateTime Date { get; set; }
 
@@ -24,6 +25,7 @@ namespace ItProject.Models.ArticleModels
         {
             Steps = new List<StepModel>();
             Comments = new List<CommentModel>();
+            ArticleUserRating = new List<Data.ArticleUserRating>();
         }
         public ArticleModel (ArticleCreateViewModel article,ApplicationUser user)
         {
@@ -34,6 +36,7 @@ namespace ItProject.Models.ArticleModels
             Date = DateTime.Now;
             Steps = new List<StepModel>();
             Comments = new List<CommentModel>();
+            ArticleUserRating = new List<Data.ArticleUserRating>();
         }
     }
 }

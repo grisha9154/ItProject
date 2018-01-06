@@ -31,11 +31,26 @@ namespace ItProject.Controllers
             return ShowArticle(comment.ArticleId);
         }
 
+        [HttpPost]
+        public IActionResult AddRating(ArticleModel article)
+        {
+            var rating = db.Articles.Find(article.Id).Rating;
+            var currentUser = db.Users.Where(user => user.UserName == User.Identity.Name).Single();
+            var count = db.ArticleUserRating.Where(articleUserRating => articleUserRating.Article==article).Count();
+            var newRating = ((rating * count) + article.Rating) / (count + 1);
+            db.Articles.Find(article.Id).Rating = newRating;
+            db.ArticleUserRating.Add(new ArticleUserRating(article,currentUser));
+            db.SaveChanges();
+            return ShowArticle(article.Id);
+        }
+
         private void Like(ApplicationUser user, CommentModel comment)
         {
             if (FiendUser(user,comment))
             {
-
+                var commentLikeUserEntity = db.CommentLikeUser.Find(comment.Id, user.Id);
+                db.CommentLikeUser.Remove(commentLikeUserEntity);
+                db.SaveChanges();
             }
             else
             {
@@ -67,11 +82,7 @@ namespace ItProject.Controllers
         [Route("article/{id:int}")]
         public IActionResult ShowArticle(int id)
         {
-            ViewBag.Articles = db.Articles.Find(id);
-            db.Users.ToList();
-            ViewBag.AllComments = db.Comments.Where(c => c.ArticlesId == id).ToList();
-            ViewBag.AllSteps = db.Steps.Where(s => s.ArticleId == id).ToList();
-            return View("Article");
+            return View("Article", db.Articles.Find(id));
         } 
     }
 }

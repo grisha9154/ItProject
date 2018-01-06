@@ -14,6 +14,7 @@ namespace ItProject.Models
         public List<ArticleModel> Articles { get; set; }
         public List<CommentModel> Comments { get; set; }
         public List<CommentLikeUser> CommentLikeUser { get; set; }
+        public List<ArticleUserRating> ArticleUserRating { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Country { get; set; }

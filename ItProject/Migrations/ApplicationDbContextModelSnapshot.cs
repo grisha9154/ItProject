@@ -20,6 +20,19 @@ namespace ItProject.Migrations
                 .HasAnnotation("ProductVersion", "2.0.1-rtm-125")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("ItProject.Data.ArticleUserRating", b =>
+                {
+                    b.Property<int>("ArticleId");
+
+                    b.Property<string>("UserId");
+
+                    b.HasKey("ArticleId", "UserId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("ArticleUserRating");
+                });
+
             modelBuilder.Entity("ItProject.Data.CommentLikeUser", b =>
                 {
                     b.Property<int>("CommentId");
@@ -293,6 +306,19 @@ namespace ItProject.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("ItProject.Data.ArticleUserRating", b =>
+                {
+                    b.HasOne("ItProject.Models.ArticleModels.ArticleModel", "Article")
+                        .WithMany("ArticleUserRating")
+                        .HasForeignKey("ArticleId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("ItProject.Models.ApplicationUser", "User")
+                        .WithMany("ArticleUserRating")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("ItProject.Data.CommentLikeUser", b =>

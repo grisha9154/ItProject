@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace ItProject.Migrations
 {
-    public partial class initial : Migration
+    public partial class initiall : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -197,6 +197,30 @@ namespace ItProject.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ArticleUserRating",
+                columns: table => new
+                {
+                    ArticleId = table.Column<int>(nullable: false),
+                    UserId = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ArticleUserRating", x => new { x.ArticleId, x.UserId });
+                    table.ForeignKey(
+                        name: "FK_ArticleUserRating_Articles_ArticleId",
+                        column: x => x.ArticleId,
+                        principalTable: "Articles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ArticleUserRating_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Comments",
                 columns: table => new
                 {
@@ -301,6 +325,11 @@ namespace ItProject.Migrations
                 column: "ApplicationUserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ArticleUserRating_UserId",
+                table: "ArticleUserRating",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
                 column: "RoleId");
@@ -367,6 +396,9 @@ namespace ItProject.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "ArticleUserRating");
+
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
