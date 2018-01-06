@@ -10,12 +10,30 @@
     <div class="col">
         @foreach (var article in Model)
         {
-            <a asp-controller="Manage" asp-action="UpdateArticle" asp-route-id="@article.Id" class="btn btn-link">@article.Name</a>
-            <a asp-controller="Manage" asp-action="DeleteArticle" asp-route-id="@article.Id" class="btn">delete</a>
+            <div class="row">
+                <a asp-controller="Manage" asp-action="UpdateArticle" asp-route-id="@article.Id" class="btn btn-link">@article.Name</a>
+                <a asp-controller="Manage" asp-action="DeleteArticle" asp-route-id="@article.Id" class="btn">delete</a>
+            </div>
         }
     </div>
     <div class="col">
-        <a asp-controller="Manage" asp-action="CreateArticle" class="btn">Create</a>
+        <div class="row">
+            <a asp-controller="Manage" asp-action="CreateArticle" class="btn">Create</a>
+        </div>
+        <div class="row">
+            <form action="../Manage/Sort" method="post">
+                <select name="Name">
+                    <option>Name</option>
+                    <option>Date</option>
+                    <option>Rating</option>
+                </select>
+                <select name="Sort">
+                    <option>Desk</option>
+                    <option>Ask</option>
+                </select>
+                <input type="submit" value="sort" class="btn"/>
+            </form>
+        </div>
     </div>
 </div>
 

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace ItProject.Migrations
 {
-    public partial class initiall : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -51,6 +51,19 @@ namespace ItProject.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Tags",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tags", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -235,6 +248,30 @@ namespace ItProject.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "TagArticle",
+                columns: table => new
+                {
+                    ArticleId = table.Column<int>(nullable: false),
+                    TagId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TagArticle", x => new { x.ArticleId, x.TagId });
+                    table.ForeignKey(
+                        name: "FK_TagArticle_Articles_ArticleId",
+                        column: x => x.ArticleId,
+                        principalTable: "Articles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_TagArticle_Tags_TagId",
+                        column: x => x.TagId,
+                        principalTable: "Tags",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "CommentLikeUser",
                 columns: table => new
                 {
@@ -321,6 +358,11 @@ namespace ItProject.Migrations
                 name: "IX_Steps_ArticleId",
                 table: "Steps",
                 column: "ArticleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TagArticle_TagId",
+                table: "TagArticle",
+                column: "TagId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -347,10 +389,16 @@ namespace ItProject.Migrations
                 name: "Steps");
 
             migrationBuilder.DropTable(
+                name: "TagArticle");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "Comments");
+
+            migrationBuilder.DropTable(
+                name: "Tags");
 
             migrationBuilder.DropTable(
                 name: "Articles");

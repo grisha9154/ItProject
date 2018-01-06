@@ -63,6 +63,15 @@ namespace ItProject.Controllers
             return user;
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Sort(ArticleSortViewModel sort)
+        {
+            var user = await GetUser();
+            var model = user.Articles.ToList();
+            model.Sort();
+            return View("Article",model);
+        }
+
         [HttpGet]
         public IActionResult CreateStep(int id)
         {
@@ -85,9 +94,9 @@ namespace ItProject.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateArticle(ArticleCreateViewModel article)
+        public async Task<IActionResult> CreateArticle(ArticleCreateViewModel article)
         {
-            var currentUser = _db.Users.Where(user => user.UserName == User.Identity.Name).Single();
+            var currentUser = await GetUser();
             var res = _db.Articles.Add(new ArticleModel(article, currentUser));
             _db.SaveChanges();
             return View("UpdateArticle", res.Entity);

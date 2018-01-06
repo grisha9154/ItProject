@@ -1,4 +1,5 @@
-﻿using ItProject.Models.ArticleViewModels;
+﻿using ItProject.Data;
+using ItProject.Models.ArticleViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace ItProject.Models.ArticleModels
         public string Name { get; set; }
         public string Description { get; set; }
         public string Theme { get; set; }
-        //  public List<string> Tags { get; set; }
+        public List<TagArticle> Tags { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
         public List<CommentModel> Comments { get; set; }
         public List<StepModel> Steps { get; set; }

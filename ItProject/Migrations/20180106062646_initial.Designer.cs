@@ -11,8 +11,8 @@ using System;
 namespace ItProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180105112657_initiall")]
-    partial class initiall
+    [Migration("20180106062646_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,6 +32,19 @@ namespace ItProject.Migrations
                     b.HasIndex("ApplicationUserId");
 
                     b.ToTable("CommentLikeUser");
+                });
+
+            modelBuilder.Entity("ItProject.Data.TagArticle", b =>
+                {
+                    b.Property<int>("ArticleId");
+
+                    b.Property<int>("TagId");
+
+                    b.HasKey("ArticleId", "TagId");
+
+                    b.HasIndex("TagId");
+
+                    b.ToTable("TagArticle");
                 });
 
             modelBuilder.Entity("ItProject.Models.ApplicationUser", b =>
@@ -163,6 +176,18 @@ namespace ItProject.Migrations
                     b.ToTable("Steps");
                 });
 
+            modelBuilder.Entity("ItProject.Models.ArticleModels.Tag", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Tags");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -281,6 +306,19 @@ namespace ItProject.Migrations
                     b.HasOne("ItProject.Models.ArticleModels.CommentModel", "Comment")
                         .WithMany("CommentLikeUser")
                         .HasForeignKey("CommentId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("ItProject.Data.TagArticle", b =>
+                {
+                    b.HasOne("ItProject.Models.ArticleModels.ArticleModel", "Article")
+                        .WithMany("Tags")
+                        .HasForeignKey("ArticleId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("ItProject.Models.ArticleModels.Tag", "Tag")
+                        .WithMany("Articles")
+                        .HasForeignKey("TagId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
