@@ -12,5 +12,17 @@ namespace ItProject.Data
         public Tag Tag { get; set; }
         public int ArticleId { get; set; }
         public ArticleModel Article { get; set; }
+        
+        public TagArticle()
+        {
+
+        }
+        public TagArticle(ArticleModel article, Tag tag)
+        {
+            TagId = tag.Id;
+            Tag = tag;
+            ArticleId = article.Id;
+            Article = article;
+        }
     }
 }

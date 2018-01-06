@@ -11,5 +11,16 @@ namespace ItProject.Models.ArticleModels
         public int Id { get; set; }
         public string Name { get; set; }
         public List<TagArticle> Articles { get; set; }
+
+        public Tag()
+        {
+            Articles = new List<TagArticle>();
+        }
+
+        public Tag(string name)
+        {
+            Name = name;
+            Articles = new List<TagArticle>();
+        }
     }
 }

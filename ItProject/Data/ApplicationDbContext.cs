@@ -16,6 +16,7 @@ namespace ItProject.Data
         public DbSet<StepModel> Steps { get; set; }
         public DbSet<Tag>Tags { get; set; }
         public DbSet<CommentLikeUser> CommentLikeUser { get; set; }
+        public DbSet<TagArticle> TagArticle { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)

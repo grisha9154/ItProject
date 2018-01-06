@@ -87,6 +87,47 @@ namespace ItProject.Controllers
             return View(_db.Articles.Find(step.ArticleId));
         }
 
+        private Tag CreateTag(string tagName)
+        {
+            var tag = new Tag(tagName);
+            _db.Tags.Add(tag);
+            _db.SaveChanges();
+            return tag;
+        }
+
+        private Tag CheakTag(Tag tag,string tagName)
+        {
+            if (tag == null)
+            {
+             tag=  CreateTag(tagName);
+            }
+            return tag;
+        }
+
+        private List<Tag> FindTag(IEnumerable<string> tags)
+        {
+            List<Tag> resualtTags = new List<Tag>();
+            foreach(var tag in tags)
+            {
+                if (tag != "")
+                {
+                    var dbTag = _db.Tags.Where(t => t.Name == tag).SingleOrDefault();
+                    resualtTags.Add(CheakTag(dbTag, tag));
+                }
+            }
+            return resualtTags;
+        }
+
+        private void CreateTagArticle(ArticleModel article,IEnumerable<Tag> tags)
+        {
+            foreach(var tag in tags)
+            {
+                _db.TagArticle.Add(new TagArticle(article,tag));
+                _db.SaveChanges();
+            }
+        }
+
+
         [HttpGet]
         public IActionResult CreateArticle()
         {
@@ -97,8 +138,10 @@ namespace ItProject.Controllers
         public async Task<IActionResult> CreateArticle(ArticleCreateViewModel article)
         {
             var currentUser = await GetUser();
+            var tags = FindTag(article.Tags.Split(' '));
             var res = _db.Articles.Add(new ArticleModel(article, currentUser));
             _db.SaveChanges();
+            CreateTagArticle(res.Entity, tags);
             return View("UpdateArticle", res.Entity);
         }
 
