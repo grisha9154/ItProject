@@ -15,6 +15,12 @@ namespace ItProject.Controllers
     {
         private ApplicationDbContext db;
 
+        [HttpGet]
+        public IActionResult GetComment(int id)
+        {
+            return View("_Comments", db.Articles.Find(id));
+        }
+
         public ArticleController (ApplicationDbContext application)
         {
             this.db = application;
