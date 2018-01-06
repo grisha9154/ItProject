@@ -8,6 +8,7 @@ using ItProject.Models;
 using ItProject.Models.ArticleModels;
 using ItProject.Data;
 using Microsoft.EntityFrameworkCore;
+using ItProject.Models.ArticleViewModels;
 
 namespace ItProject.Controllers
 {
@@ -17,12 +18,15 @@ namespace ItProject.Controllers
         public HomeController(ApplicationDbContext application)
         {
             this.db = application;
+            db.InitialDBComponent();
         }
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            db.Users.ToList();
-            ViewBag.Articles = await db.Articles.ToListAsync();
-            return View();
+            var model = new MainArticleViewModel();
+            model.ArticleMaxDate = db.Articles.OrderByDescending(a=>a.Date).ToList();
+            model.ArticleMaxRating = db.Articles.OrderByDescending(a => a.Rating).ToList();
+            model.TagCloud = db.Tags.OrderByDescending(a => a.Id).ToList();
+            return View(model);
         }
 
         public IActionResult About()

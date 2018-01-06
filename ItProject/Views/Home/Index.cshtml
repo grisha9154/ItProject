@@ -1,20 +1,53 @@
-﻿@{
+﻿@model ItProject.Models.ArticleViewModels.MainArticleViewModel
+@{
     ViewData["Title"] = "Home Page";
+    int i = 0;
+    int j = 0;
 }
 
 <div class="container">
-    @{foreach (var article in ViewBag.Articles)
+    <h2>New Article</h2>
+    <div class="row">
+        @foreach (var article in Model.ArticleMaxDate)
         {
-            <div class="container">
-                <h2>@article.Name</h2>
-                <p>@article.ApplicationUser.UserName</p>
-                <div class="card" style="width:400px">
+            @if (i == 3)
+            {
+                break;
+            }
+        <div class="col">
+            <p>@article.Name</p>
+            <div class="card" style="width:300px">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col">@article.Theme</div>
+                        <div class="col" align="right">@article.Date.ToShortDateString()</div>
+                    </div>
+                </div>
+                <img class="card-img-top" src="" alt="Card image" style="width:100%">
+                <div class="card-body">
+                    <p class="card-text">@article.Description</p>
+                    <a href="article/@article.Id" class="btn btn-primary">Read Article</a>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+    <h2>Top Rating</h2>
+    <div class="row">
+        @foreach (var article in Model.ArticleMaxRating)
+        {
+            @if (j == 3)
+            {
+                break;
+            }
+            <div class="col">
+                <p>@article.Name</p>
+                <div class="card" style="width:300px">
                     <div class="card-header">
                         <div class="row">
                             <div class="col">@article.Theme</div>
-                            <div class="col" align="right">@article.Date</div>
+                            <div class="col" align="right">@article.Date.ToShortDateString()</div>
                         </div>
-
                     </div>
                     <img class="card-img-top" src="" alt="Card image" style="width:100%">
                     <div class="card-body">
@@ -22,8 +55,7 @@
                         <a href="article/@article.Id" class="btn btn-primary">Read Article</a>
                     </div>
                 </div>
-                <br>
             </div>
         }
-    }
+    </div>
 </div>
