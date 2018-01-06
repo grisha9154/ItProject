@@ -5,7 +5,6 @@
    var key = Model.ArticleUserRating.Where(a => (a.User.UserName == User.Identity.Name) && (a.ArticleId == Model.Id)).SingleOrDefault();
 }
 @model ArticleModel
-<script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
 <form asp-controller="Article" asp-action="AddRating" method="post" class="form-horizontal">
     <div class="form-group">
         <div class="col-lg-8">
