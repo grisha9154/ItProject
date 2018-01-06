@@ -28,7 +28,40 @@ namespace ItProject.Controllers
             var currentUser = db.Users.Where(user => user.UserName == User.Identity.Name).Single();
             db.Comments.Add(new CommentModel(comment.Body,currentUser,comment.ArticleId));
             db.SaveChanges();
-            return View();
+            return ShowArticle(comment.ArticleId);
+        }
+
+        private void Like(ApplicationUser user, CommentModel comment)
+        {
+            if (FiendUser(user,comment))
+            {
+
+            }
+            else
+            {
+                var com = new CommentLikeUser(comment, user);
+                db.CommentLikeUser.Add(com);
+                db.SaveChanges();
+            }
+        }
+
+        private bool FiendUser(ApplicationUser user, CommentModel comment)
+        {
+            var result = false;
+            var likeUser  = db.CommentLikeUser.Find(comment.Id, user.Id);
+            if(likeUser != null)
+            {
+                result = true;
+            }
+            return result;
+        }
+
+        [HttpGet]
+        public IActionResult AddLike(int commentId)
+        {
+            var currentUser = db.Users.Where(user => user.UserName == User.Identity.Name).Single();
+            Like(currentUser, db.Comments.Find(commentId));
+            return ShowArticle(db.Comments.Find(commentId).ArticlesId);
         }
 
         [Route("article/{id:int}")]

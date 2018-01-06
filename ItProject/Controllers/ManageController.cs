@@ -68,7 +68,7 @@ namespace ItProject.Controllers
         {
             var user = await GetUser();
             var model = user.Articles.ToList();
-            model.Sort();
+
             return View("Article",model);
         }
 
@@ -126,7 +126,6 @@ namespace ItProject.Controllers
                 _db.SaveChanges();
             }
         }
-
 
         [HttpGet]
         public IActionResult CreateArticle()
