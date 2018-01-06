@@ -67,8 +67,46 @@ namespace ItProject.Controllers
         public async Task<IActionResult> Sort(ArticleSortViewModel sort)
         {
             var user = await GetUser();
-            var model = user.Articles.ToList();
-
+            var model = new List<ArticleModel>();
+            if (sort.SortType == "Desk")
+            {
+                switch (sort.Name)
+                {
+                    case "Name":
+                        {
+                            model = user.Articles.OrderByDescending(a => a.Name).ToList();
+                        }break;
+                    case "Date":
+                        {
+                            model = user.Articles.OrderByDescending(a => a.Date).ToList();
+                        }break;
+                    case "Rating":
+                        {
+                            model = user.Articles.OrderByDescending(a => a.Rating).ToList();
+                        }break;
+                }
+            }
+            else
+            {
+                switch (sort.Name)
+                {
+                    case "Name":
+                        {
+                            model = user.Articles.OrderBy(a => a.Name).ToList();
+                        }
+                        break;
+                    case "Date":
+                        {
+                            model = user.Articles.OrderBy(a => a.Date).ToList();
+                        }
+                        break;
+                    case "Rating":
+                        {
+                            model = user.Articles.OrderBy(a => a.Rating).ToList();
+                        }
+                        break;
+                }
+            }
             return View("Article",model);
         }
 

@@ -18,21 +18,24 @@
     </div>
     <div class="col">
         <div class="row">
-            <a asp-controller="Manage" asp-action="CreateArticle" class="btn">Create</a>
+            <a asp-controller="Manage" asp-action="CreateArticle" class="btn-block">Create</a>
         </div>
         <div class="row">
             <form action="../Manage/Sort" method="post">
                 <select name="Name">
-                    <option>Name</option>
-                    <option>Date</option>
-                    <option>Rating</option>
+                    <option selected value="Name">Name</option>
+                    <option value="Date">Date</option>
+                    <option value="Rating">Rating</option>
                 </select>
-                <select name="Sort">
-                    <option>Desk</option>
-                    <option>Ask</option>
+                <select name="SortType">
+                    <option selected value="Desk">Desk</option>
+                    <option value="Ask">Ask</option>
                 </select>
                 <input type="submit" value="sort" class="btn"/>
             </form>
+        </div>
+        <div class="row">
+            <>
         </div>
     </div>
 </div>
