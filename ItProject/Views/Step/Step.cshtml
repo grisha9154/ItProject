@@ -10,10 +10,18 @@
     <div class="col-sm-2">
         @Html.Partial("../Article/_StepList", Model)
     </div>
-    <div class="col-sm-4">
+    <div class="col-sm-8">
         <div class="row">
-            <h2>@Model.Step.Name</h2>
-           @Html.Raw(CommonMark.CommonMarkConverter.Convert(Model.Step.Body))
+            <div class="col">
+                <h2>@Model.Step.Name</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                @Html.Raw(CommonMark.CommonMarkConverter.Convert(Model.Step.Body))
+            </div>
+        </div>
+        <div class="row">
             <div class="col">
                 @if (Model.ListOfStep.IndexOf(Model.Step) != 0)
                 {
@@ -21,13 +29,21 @@
                 }
             </div>
             <div class="col">
-                @if (Model.ListOfStep.IndexOf(Model.Step) < Model.ListOfStep.Count-1)
+                @if (Model.ListOfStep.IndexOf(Model.Step) < Model.ListOfStep.Count - 1)
                 {
                     <a asp-controller="Step" asp-action="ShowStep" asp-route-id="@(((Model.ListOfStep.ToArray())[Model.ListOfStep.IndexOf(Model.Step)+1]).Id)" class="btn btn-primary">Next</a>
                 }
             </div>
         </div>
-            <H2>Comments</H2>
-            @Html.Partial("../Article/_CommentList", Model.Step.Article)
+        <div class="row">
+            <div class="col">
+                <H2>Comments</H2>
+            </div>
         </div>
+        <div class="row">
+            <div class="col">
+                @Html.Partial("../Article/_CommentList", Model.Step.Article)
+            </div>
+        </div>
+    </div>
 </div>

@@ -13,6 +13,7 @@ namespace ItProject.Models.ArticleModels
         public string Name { get; set; }
         public string Description { get; set; }
         public string Theme { get; set; }
+        public string ImagePath { get; set; }
         public List<TagArticle> Tags { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
         public List<CommentModel> Comments { get; set; }
@@ -27,12 +28,13 @@ namespace ItProject.Models.ArticleModels
             Comments = new List<CommentModel>();
             ArticleUserRating = new List<Data.ArticleUserRating>();
         }
-        public ArticleModel (ArticleCreateViewModel article,ApplicationUser user)
+        public ArticleModel (ArticleCreateViewModel article,ApplicationUser user,string path)
         {
             Name = article.Name;
             Description = article.Description;
             Theme = article.Theme;
             ApplicationUser = user;
+            ImagePath = path;
             Date = DateTime.Now;
             Steps = new List<StepModel>();
             Comments = new List<CommentModel>();

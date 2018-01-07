@@ -3,6 +3,7 @@
     ViewData["Title"] = "Home Page";
     int i = 0;
     int j = 0;
+    int l = 15;
 }
 
 <div class="container">
@@ -10,20 +11,27 @@
     <div class="row">
         @foreach (var article in Model.ArticleMaxDate)
         {
-            @if (i == 3)
+            @if (i++ == 3)
             {
                 break;
             }
         <div class="col">
-            <p>@article.Name</p>
-            <div class="card" style="width:300px">
+            <div class="row">
+                <div class="col">
+                    <p>@article.Name</p>
+                </div>
+                <div class="col" align="right">
+                    <p>@article.ApplicationUser.UserName</p>
+                </div>
+            </div>
+            <div class="card" style="width:100%">
                 <div class="card-header">
                     <div class="row">
                         <div class="col">@article.Theme</div>
                         <div class="col" align="right">@article.Date.ToShortDateString()</div>
                     </div>
                 </div>
-                <img class="card-img-top" src="" alt="Card image" style="width:100%">
+                <img class="card-img-top" src="@article.ImagePath" alt="Card image" style="width:40%">
                 <div class="card-body">
                     <p class="card-text">@article.Description</p>
                     <a href="article/@article.Id" class="btn btn-primary">Read Article</a>
@@ -36,20 +44,27 @@
     <div class="row">
         @foreach (var article in Model.ArticleMaxRating)
         {
-            @if (j == 3)
+            @if (j++ == 3)
             {
                 break;
             }
             <div class="col">
-                <p>@article.Name</p>
-                <div class="card" style="width:300px">
+                <div class="row">
+                    <div class="col">
+                        <p>@article.Name</p>
+                    </div>
+                    <div class="col" align="right">
+                        <p>@article.ApplicationUser.UserName</p>
+                    </div>
+                </div>
+                <div class="card" style="width:100%">
                     <div class="card-header">
                         <div class="row">
                             <div class="col">@article.Theme</div>
                             <div class="col" align="right">@article.Date.ToShortDateString()</div>
                         </div>
                     </div>
-                    <img class="card-img-top" src="" alt="Card image" style="width:100%">
+                    <img class="card-img-top" src="@article.ImagePath" alt="Card image" style="width:40%">
                     <div class="card-body">
                         <p class="card-text">@article.Description</p>
                         <a href="article/@article.Id" class="btn btn-primary">Read Article</a>
@@ -58,4 +73,28 @@
             </div>
         }
     </div>
+    <h2>Tag Cloud</h2>
+    <div class="row">
+        <div id="CloudTag" style="width:100%; height:200px"></div>
+    </div>
 </div>
+<script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+<script src="~/js/jqcloud.min.js"></script>
+<link rel="stylesheet" href="~/js/jqcloud.min.css">
+<script>
+    var words = [
+        @foreach(var tag in Model.TagCloud)
+        {
+            if (l-- == 0)
+            {
+               @:{ text: "@tag.Name", weight:@l,link:"ArticleByTag/@tag.Id" }
+                break;
+            }
+            else
+            {
+               @:{ text: "@tag.Name", weight:@l, link:"ArticleByTag/@tag.Id" },
+            }
+        }
+    ];
+    $('#CloudTag').jQCloud(words);
+</script>

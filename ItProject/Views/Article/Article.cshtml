@@ -19,16 +19,25 @@
     <div class="col-sm-8">
         <div class="row">
             <div class="col">
-                <h2>Article</h2>
+                <h3>@Model.Name</h3>
             </div>
+            @if (User.Identity.IsAuthenticated)
+            {
             <div class="col">
-                @Html.Partial("_Rating",Model)
+                @Html.Partial("_Rating", Model)
+            </div>
+            }
+        </div>
+        <div class="row">
+            <div class="col">
+                @Model.Description
             </div>
         </div>
-        @Model.Name<br>
-        @Model.Description
+@if (User.Identity.IsAuthenticated)
+{
         <H2>Comments</H2>
         @Html.Partial("_CommentList", Model)
+}
     </div>
 </div>
 

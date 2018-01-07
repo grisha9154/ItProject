@@ -131,6 +131,8 @@ namespace ItProject.Migrations
 
                     b.Property<string>("Description");
 
+                    b.Property<string>("ImagePath");
+
                     b.Property<string>("Name");
 
                     b.Property<float>("Rating");
@@ -198,6 +200,20 @@ namespace ItProject.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Tags");
+                });
+
+            modelBuilder.Entity("ItProject.Models.FileModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("Path");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Files");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

@@ -12,16 +12,16 @@
         {
             <div class="row">
                 <a asp-controller="Manage" asp-action="UpdateArticle" asp-route-id="@article.Id" class="btn btn-link">@article.Name</a>
-                <a asp-controller="Manage" asp-action="DeleteArticle" asp-route-id="@article.Id" class="btn">delete</a>
+                <a asp-controller="Manage" asp-action="DeleteArticle" asp-route-id="@article.Id" class="btn btn-primary">Delete</a>
             </div>
         }
     </div>
     <div class="col">
         <div class="row">
-            <a asp-controller="Manage" asp-action="CreateArticle" class="btn-block">Create</a>
+            <a asp-controller="Manage" asp-action="CreateArticle" class="btn btn-primary">Create</a>
         </div>
         <div class="row">
-            <form action="../Manage/Sort" method="post">
+            <form action="~/Manage/Sort" method="post">
                 <select name="Name">
                     <option selected value="Name">Name</option>
                     <option value="Date">Date</option>
@@ -31,11 +31,8 @@
                     <option selected value="Desk">Desk</option>
                     <option value="Ask">Ask</option>
                 </select>
-                <input type="submit" value="sort" class="btn"/>
+                <input type="submit" value="sort" class="btn btn-primary"/>
             </form>
-        </div>
-        <div class="row">
-            <>
         </div>
     </div>
 </div>

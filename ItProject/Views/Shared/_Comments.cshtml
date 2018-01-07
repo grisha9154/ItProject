@@ -1,0 +1,40 @@
+﻿@using ItProject.Models.ArticleModels
+@using ItProject.Data
+@{
+    Layout = null;
+}
+@model ArticleModel
+
+
+<div class="row" id="Comment">
+    @if (Model.Comments.Count > 0)
+    {
+            <div class="col">
+                @foreach (var comment in Model.Comments)
+                {
+                        <div class="card" style="width:62%">
+                            <div class="card-header">
+                                <div class="row">
+                                    <div class="col">
+                                        @comment.ApplicationUser.UserName
+                                    </div>
+                                    <div class="col" align="right">
+                                        @comment.Date.ToShortDateString()
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">@comment.Body</p>
+                                <div class="row">
+                                    <div class="col">
+                                        @comment.CommentLikeUser.Count
+                                        <a asp-controller="Article" asp-action="AddLike" asp-route-commentId="@comment.Id"><img src="~/images/hart.png" width="16"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <br>
+                    }
+                </div>
+                }
+</div>

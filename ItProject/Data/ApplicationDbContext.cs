@@ -18,6 +18,7 @@ namespace ItProject.Data
         public DbSet<CommentLikeUser> CommentLikeUser { get; set; }
         public DbSet<TagArticle> TagArticle { get; set; }
         public DbSet<ArticleUserRating> ArticleUserRating { get; set; }
+        public DbSet<FileModel> Files { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -26,7 +27,7 @@ namespace ItProject.Data
 
         private IEnumerable<IEnumerable<Object>> FieldToList()
         {
-            return new List<IEnumerable<Object>>() { Articles, Comments, Steps, CommentLikeUser,Users,Tags,ArticleUserRating };
+            return new List<IEnumerable<Object>>() { Articles, Comments, Steps, CommentLikeUser,Users,Tags,ArticleUserRating, Files, TagArticle };
         }
 
         public void InitialDBComponent()

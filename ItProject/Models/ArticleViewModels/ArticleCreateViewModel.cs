@@ -1,4 +1,5 @@
 ﻿using ItProject.Models.ArticleModels;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +13,6 @@ namespace ItProject.Models.ArticleViewModels
         public string Description { get; set; }
         public string Theme { get; set; }
         public string Tags { get; set; }
+        public IFormFile ImagePath { get; set; }  
     }
 }

@@ -16,6 +16,9 @@ using ItProject.Services;
 using ItProject.Data;
 using ItProject.Models.ArticleViewModels;
 using ItProject.Models.ArticleModels;
+using Microsoft.AspNetCore.Http;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
 
 namespace ItProject.Controllers
 {
@@ -29,6 +32,7 @@ namespace ItProject.Controllers
         private readonly ILogger _logger;
         private readonly UrlEncoder _urlEncoder;
         private readonly ApplicationDbContext _db;
+        private readonly IHostingEnvironment _appEnvironment;
 
         private const string AuthenicatorUriFormat = "otpauth://totp/{0}:{1}?secret={2}&issuer={0}&digits=6";
 
@@ -37,6 +41,7 @@ namespace ItProject.Controllers
           SignInManager<ApplicationUser> signInManager,
           IEmailSender emailSender,
           ILogger<ManageController> logger,
+          IHostingEnvironment appEnvironment,
           UrlEncoder urlEncoder,
           ApplicationDbContext application
           )
@@ -47,6 +52,7 @@ namespace ItProject.Controllers
             _logger = logger;
             _urlEncoder = urlEncoder;
             _db = application;
+            _appEnvironment = appEnvironment;
             _db.InitialDBComponent();
         }
 
@@ -121,6 +127,7 @@ namespace ItProject.Controllers
         public IActionResult CreateStep(StepCreateViewModel step)
         {
             _db.Steps.Add(new StepModel(step));
+            _db.Articles.Find(step.ArticleId).Date = DateTime.Now;
             _db.SaveChanges();
             return View(_db.Articles.Find(step.ArticleId));
         }
@@ -165,20 +172,42 @@ namespace ItProject.Controllers
             }
         }
 
+        private async Task<string>  UploadFile(IFormFile uploadedFile)
+        {
+            string path ="\\images\\no_image.gif";
+            if (uploadedFile != null)
+            {
+                // путь к папке Files
+                path = "\\images\\" + uploadedFile.FileName.Split("\\").Last();
+                // сохраняем файл в папку Files в каталоге wwwroot
+                using (var fileStream = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create))
+                {
+                    await uploadedFile.CopyToAsync(fileStream);
+                }
+                FileModel file = new FileModel { Name = uploadedFile.FileName.Split("\\").Last(), Path = path };
+                _db.Files.Add(file);
+            }
+            return path;
+        }
+
         [HttpGet]
         public IActionResult CreateArticle()
         {
-            return View();
+            ViewBag.List = Theme.ListOfTheme;
+            var model = _db.Tags.ToList();
+            return View(model);
         }
 
         [HttpPost]
         public async Task<IActionResult> CreateArticle(ArticleCreateViewModel article)
         {
+            var path = await UploadFile(article.ImagePath);
             var currentUser = await GetUser();
             var tags = FindTag(article.Tags.Split(' '));
-            var res = _db.Articles.Add(new ArticleModel(article, currentUser));
+            var res = _db.Articles.Add(new ArticleModel(article, currentUser,path));
             _db.SaveChanges();
             CreateTagArticle(res.Entity, tags);
+            ViewBag.List = Theme.ListOfTheme;
             return View("UpdateArticle", res.Entity);
         }
 
@@ -187,6 +216,7 @@ namespace ItProject.Controllers
         public IActionResult UpdateArticle(int id)
         {
             var model = _db.Articles.Find(id);
+            ViewBag.List = Theme.ListOfTheme;
             return View(model);
         }
 
@@ -208,6 +238,7 @@ namespace ItProject.Controllers
             }
             dbArticle.Date = DateTime.Now;
             _db.SaveChanges();
+            ViewBag.List = Theme.ListOfTheme;
             return View(dbArticle);
         }
 
@@ -252,6 +283,7 @@ namespace ItProject.Controllers
         {
             var user =await GetUser();
             var model = user.Articles.ToList();
+            ViewBag.List = Theme.ListOfTheme;
             return View(model);
         }
 

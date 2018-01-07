@@ -1,16 +1,15 @@
 ﻿@using ItProject.Models.ArticleModels
-@model List<ArticleModel>
+@model List<Tag>
 @{
     ViewData["Title"] = "Profile";
     ViewData.AddActivePage(ManageNavPages.Article);
 }
 
 <h2>CreateArticle</h2>
-
+<link rel="stylesheet" href="~/js/awesomplete.css" />
 <div class="row">
     <div class="col">
-        <form action="../Manage/CreateArticle" method="post">
-
+        <form action="../Manage/CreateArticle" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <h3>
                     Name:
@@ -27,16 +26,36 @@
                 <h3>
                     Theme:
                 </h3>
-                <input name="Theme" type="text">
+                <select name="Theme">
+                    @foreach (var theme in ViewBag.List)
+                    {
+                        <option selected value="@theme">@theme</option>
+                    }
+                </select>
             </div>
             <div class="form-group">
                 <h3>
                     Tags:
                 </h3>
-                <input name="Tags" type="text">
+                <input class="Awesomplete" name="Tags" type="text" list="mylist">
+                <datalist id="mylist">
+                    @foreach (var tag in Model)
+                    {
+                       
+                           @: <option>@tag.Name</option>
+                    }
+                </datalist>
             </div>
-            <input type="submit" value="Update">
+            <div class="form-group">
+                <h3>
+                    Image:
+                </h3>
+                <input type="file" name="ImagePath" />
+            </div>
+            <input type="submit" value="Create">
         </form>
     </div>
 </div>
+
+<script src="~/js/awesomplete.js" async></script>
 

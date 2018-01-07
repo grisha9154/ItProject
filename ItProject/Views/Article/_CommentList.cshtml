@@ -6,17 +6,21 @@
 @model ArticleModel
 
 
-<div class="col">
+<form action="~/Article/CreateComment" method="post">
     <div class="row">
-        <form action="../Article/CreateComment" method="post">
+        <div class="col">
             <textarea name="Body" cols="70" rows="5"></textarea>
             <input name="ArticleId" type="hidden" value="@Model.Id" />
-            <input type="submit" value="Coment" />
-        </form>
+        </div>
     </div>
-        @Html.Partial("_Comments", Model)
- 
-</div>
+    <br>
+    <div class="row">
+        <div class="col">
+            <input type="submit" value="Coment" />
+        </div>
+    </div>
+</form>
+@Html.Partial("_Comments", Model)
 <script>
     setInterval(function () {
         $.get("../Article/GetComment/@Model.Id", (data) => {
@@ -24,4 +28,4 @@
         });
     }, 5000);
 
-    </script>
+</script>

@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.0",
-    "signature": "3f3b503d6114bc560ad6748535fcefd6b9bf61b7"
+    "signature": "f6d043ac899a19f3e00515ec84d2df63304f562a"
   },
   "compilationOptions": {
     "defines": [
@@ -23,9 +23,11 @@
     ".NETCoreApp,Version=v2.0": {
       "ItProject/1.0.0": {
         "dependencies": {
+          "AspNet.Security.OAuth.VK": "0.0.1",
           "CommonMark.NET": "0.15.1",
-          "MailKit": "2.0.0",
+          "MailKit": "2.0.1",
           "Microsoft.AspNetCore.All": "2.0.3",
+          "Microsoft.AspNetCore.Authentication.Twitter": "2.0.1",
           "Microsoft.EntityFrameworkCore.Tools": "2.0.1",
           "Microsoft.NETCore.App": "2.0.0",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "2.0.1"
@@ -35,6 +37,17 @@
         },
         "compile": {
           "ItProject.dll": {}
+        }
+      },
+      "AspNet.Security.OAuth.VK/0.0.1": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Authentication.OAuth": "2.0.1"
+        },
+        "runtime": {
+          "lib/netcoreapp2.0/AspNet.Security.OAuth.VK.dll": {}
+        },
+        "compile": {
+          "lib/netcoreapp2.0/AspNet.Security.OAuth.VK.dll": {}
         }
       },
       "CommonMark.NET/0.15.1": {
@@ -84,9 +97,9 @@
           }
         }
       },
-      "MailKit/2.0.0": {
+      "MailKit/2.0.1": {
         "dependencies": {
-          "MimeKit": "2.0.0",
+          "MimeKit": "2.0.1",
           "NETStandard.Library": "2.0.0",
           "Portable.BouncyCastle": "1.8.1.3",
           "System.Data.Common": "4.3.0",
@@ -2476,7 +2489,7 @@
           "ref/netstandard2.0/Microsoft.Win32.Registry.dll": {}
         }
       },
-      "MimeKit/2.0.0": {
+      "MimeKit/2.0.1": {
         "dependencies": {
           "NETStandard.Library": "2.0.0",
           "Portable.BouncyCastle": "1.8.1.3",
@@ -4372,6 +4385,13 @@
       "serviceable": false,
       "sha512": ""
     },
+    "AspNet.Security.OAuth.VK/0.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Jj1ZqAhWLTv+G4+SWCdMSwirwekE10LZbWocesHVaWxiOGPkFThtvG2CI47hOsJf/RLXTW3F2hf7gIGO1X9wag==",
+      "path": "aspnet.security.oauth.vk/0.0.1",
+      "hashPath": "aspnet.security.oauth.vk.0.0.1.nupkg.sha512"
+    },
     "CommonMark.NET/0.15.1": {
       "type": "package",
       "serviceable": true,
@@ -4386,12 +4406,12 @@
       "path": "libuv/1.10.0",
       "hashPath": "libuv.1.10.0.nupkg.sha512"
     },
-    "MailKit/2.0.0": {
+    "MailKit/2.0.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-EETrL74ekcKYzvT7zrs0tPwtLG+LU1xpqSETvwQTgkEKk3AcUulAi/aLwb1PFpMGK3X+yU+3ixlDC7gp+eRa8A==",
-      "path": "mailkit/2.0.0",
-      "hashPath": "mailkit.2.0.0.nupkg.sha512"
+      "sha512": "sha512-eRzHd5EN+ST3hGUED4QH44nINxnALQbFozPDVlZODydIWgYO19+m6/txvbV69qF4cpjXwlxO7ivpIcB+/97X2A==",
+      "path": "mailkit/2.0.1",
+      "hashPath": "mailkit.2.0.1.nupkg.sha512"
     },
     "Microsoft.ApplicationInsights/2.4.0": {
       "type": "package",
@@ -5590,12 +5610,12 @@
       "path": "microsoft.win32.registry/4.4.0",
       "hashPath": "microsoft.win32.registry.4.4.0.nupkg.sha512"
     },
-    "MimeKit/2.0.0": {
+    "MimeKit/2.0.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-ObOaNijeqGdpdmZ8ckmUG1eniiY+odNhC3AxlDaIeIv9BsNWvWpyRCDxZzf1Fzb6H293xNMS4rrxAHVL495r/w==",
-      "path": "mimekit/2.0.0",
-      "hashPath": "mimekit.2.0.0.nupkg.sha512"
+      "sha512": "sha512-b71yNg43rxCjg9YJyHdHIYLLken8cwg05AcqzM+paLkqD6hbWCJ8zfcb7b0g0kCLfcIqvv9meHzUWJpEciyC9Q==",
+      "path": "mimekit/2.0.1",
+      "hashPath": "mimekit.2.0.1.nupkg.sha512"
     },
     "Newtonsoft.Json/10.0.1": {
       "type": "package",

@@ -23,24 +23,19 @@ namespace ItProject.Controllers
         public IActionResult Index()
         {
             var model = new MainArticleViewModel();
-            model.ArticleMaxDate = db.Articles.OrderByDescending(a=>a.Date).ToList();
+            model.ArticleMaxDate = db.Articles.OrderByDescending(a => a.Date).ToList();
             model.ArticleMaxRating = db.Articles.OrderByDescending(a => a.Rating).ToList();
             model.TagCloud = db.Tags.OrderByDescending(a => a.Id).ToList();
             return View(model);
         }
 
-        public IActionResult About()
+        [HttpGet]
+        [Route("ArticleByTag/{id:int}")]
+        public IActionResult ShowArticleByTag(int id)
         {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
+            var tag = db.Tags.Where(t => t.Id == id).Single();
+            var articles = tag.Articles.ToList();
+            return View("Articles",articles);
         }
 
         public IActionResult Error()

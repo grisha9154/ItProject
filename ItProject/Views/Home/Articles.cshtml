@@ -1,0 +1,12 @@
+﻿@model List<ItProject.Data.TagArticle>
+@{
+    ViewData["Title"] = "Articles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Articles</h2>
+@foreach(var tag in Model)
+{
+    <a  href = "../article/@tag.Article.Id" class="btn btn-primary">@tag.Article.Name</a>
+}
+
